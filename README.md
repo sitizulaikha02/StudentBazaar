@@ -11,6 +11,7 @@
 
 ### Frontend (UI/UX Design) - Najib
 - Create the UI for sign-up and log-in pages, ensuring user-friendly design and navigation.
+- Files: SignUpActivity.kt, LoginActivity.kt, activity_signup.xml, activity_login.xml
 
 #### Tasks:
 - Design the layout of the sign-up and log-in forms.
@@ -18,6 +19,7 @@
 
 ### Backend (Firebase Integration) - Hareez
 - Set up Firebase authentication.
+- Files: FirebaseAuthService.kt
 
 #### Tasks:
 - Implement Firebase API for signing in and signing up.
@@ -27,19 +29,21 @@
 
 ## 2. User Preferences
 
-### Backend (Database Structure) - Zu
-- Design and implement the database structure for storing user preferences.
-
-#### Tasks:
-- Define necessary fields for user preferences (e.g., categories, notification settings).
-- Create Firestore collections or a Realtime Database structure to store preferences.
-
 ### Frontend (Preference UI) - Es
 - Create the UI for users to set and manage preferences.
+- Files: UserPreferencesActivity.kt, activity_user_preferences.xml
 
 #### Tasks:
 - Design the layout for preference settings.
 - Implement the functionality to update preferences through the UI.
+
+- ### Backend (Database Structure) - Zu
+- Design and implement the database structure for storing user preferences.
+- Files: PreferencesManager.kt
+
+#### Tasks:
+- Define necessary fields for user preferences (e.g., categories, notification settings).
+- Create Firestore collections or a Realtime Database structure to store preferences.
 
 ---
 
@@ -47,6 +51,7 @@
 
 ### Frontend (Homepage Design) - Najib
 - Design the homepage layout that displays item listings.
+- Files: HomepageActivity.kt, activity_homepage.xml
 
 #### Tasks:
 - Create sections for featured items, categories, and other relevant content.
@@ -54,6 +59,7 @@
 
 ### Backend (Data Handling) - Hareez
 - Implement the backend logic to store and retrieve item listings from the database.
+- Files: ItemRepository.kt
 
 #### Tasks:
 - Set up API endpoints for retrieving item listings.
@@ -65,6 +71,7 @@
 
 ### Frontend (Profile Page Design) - Zu
 - Create the UI for the user profile page.
+- Files: UserProfileActivity.kt, activity_user_profile.xml
 
 #### Tasks:
 - Design sections for displaying user information, preferences, and item listings.
@@ -72,6 +79,7 @@
 
 ### Backend (Profile Data Management) - Es
 - Implement backend functionality to manage user profiles.
+- Files: ProfileRepository.kt
 
 #### Tasks:
 - Set up API endpoints to fetch and update user profile data.
