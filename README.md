@@ -59,7 +59,7 @@
 
 ### Backend (Data Handling) - Hareez
 - Implement the backend logic to store and retrieve item listings from the database.
-- Files: ItemRepository.kt
+- Files: ItemManager.kt
 
 #### Tasks:
 - Set up API endpoints for retrieving item listings.
@@ -79,7 +79,7 @@
 
 ### Backend (Profile Data Management) - Es
 - Implement backend functionality to manage user profiles.
-- Files: ProfileRepository.kt
+- Files: ProfileManager.kt
 
 #### Tasks:
 - Set up API endpoints to fetch and update user profile data.
