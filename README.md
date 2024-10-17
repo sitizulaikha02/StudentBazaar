@@ -2,10 +2,10 @@
 
 ## Table of Contents
 
-1. [Sign up & Log in](#sign-up--log-in)
-2. [User Preferences](#user-preferences)
-3. [Homepage Layout](#homepage-layout)
-4. [User Profile Page](#user-profile-page)
+1. Sign up & Log in
+2. User Preferences
+3. Homepage Layout
+4. User Profile Page
 
 ## 1. Sign up & Log in
 
