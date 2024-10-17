@@ -37,7 +37,7 @@
 - Design the layout for preference settings.
 - Implement the functionality to update preferences through the UI.
 
-- ### Backend (Database Structure) - Zu
+### Backend (Database Structure) - Zu
 - Design and implement the database structure for storing user preferences.
 - Files: PreferencesManager.kt
 
