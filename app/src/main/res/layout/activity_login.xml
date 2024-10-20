@@ -35,12 +35,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/signupButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="32dp"
         android:text="@string/login_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
@@ -64,11 +65,31 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="135dp"
         android:layout_marginBottom="137dp"
-        android:text="@string/greeting_text"
+        android:text="@string/greeting_login"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/passwordEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/questionLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:text="@string/question_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signupButton" />
+
+    <Button
+        android:id="@+id/signupRedirect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="7dp"
+        android:text="@string/signup_button"
+        app:layout_constraintStart_toStartOf="@+id/questionLogin"
+        app:layout_constraintTop_toBottomOf="@+id/questionLogin" />
 
     <!-- Login Button -->
 

@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Student Bazaar</string>
-    <string name="greeting_text">Welcome to Student Bazaar!</string>
+    <string name="greeting_signup">Welcome to Student Bazaar!</string>
+    <string name="greeting_login">Welcome Back to Student Bazaar!</string>
+    <string name="question_signup">Have an account? Log in below!</string>
+    <string name="question_login">New here? Sign up below</string>
     <string name="username_hint">Enter Username</string>
     <string name="password_hint">Enter Password</string>
     <string name="login_button">Log In</string>
@@ -13,4 +16,5 @@
     <string name="save_button">Save</string>
     <string name="logout">Log Out</string>
     <string name="delete_account">Delete Account</string>
+    <string name="userPasswdKV">com.cs407.studentBazaar.userPasswdKV</string>
 </resources>
