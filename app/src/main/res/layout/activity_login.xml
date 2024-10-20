@@ -57,6 +57,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
 
+    <TextView
+        android:id="@+id/greetings"
+        android:layout_width="319dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="135dp"
+        android:layout_marginBottom="137dp"
+        android:text="@string/greeting_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/passwordEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <!-- Login Button -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
