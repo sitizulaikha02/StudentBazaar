@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Student Bazaar</string>
+    <string name="greeting_text">Welcome to Student Bazaar!</string>
+    <string name="username_hint">Enter Username</string>
+    <string name="password_hint">Enter Password</string>
+    <string name="login_button">Log In</string>
+    <string name="signup_button">Sign Up</string>
+    <string name="fail_login">Wrong Username or Password</string>
+    <string name="login_screen">LoginScreen</string>
+    <string name="note_list_screen">NoteListScreen</string>
+    <string name="note_database">noteDatabase</string>
+    <string name="note_content_screen">NoteContentScreen</string>
+    <string name="save_button">Save</string>
+    <string name="logout">Log Out</string>
+    <string name="delete_account">Delete Account</string>
 </resources>
