@@ -1,5 +1,6 @@
 package com.cs407.studentbazaar
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -38,24 +39,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Handle Login
+        // Handle Login Redirect
         loginRedirectButton.setOnClickListener {
-            val email = usernameEditText.text.toString().trim()
-            val password = passwordEditText.text.toString().trim()
-
-            signIn(email, password)
+            // Start the LoginActivity when the login button is clicked
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
-    }
-
-    private fun signIn(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(this, "Sign-in successful.", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "Authentication failed. Please try again.", Toast.LENGTH_SHORT).show()
-                }
-            }
     }
 
     private fun registerUser(email: String, password: String) {
@@ -63,6 +52,10 @@ class MainActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Registration successful.", Toast.LENGTH_SHORT).show()
+                    // Navigate to UserPreferencesActivity after successful registration
+                    val intent = Intent(this, UserPreferencesActivity::class.java)
+                    startActivity(intent)
+                    finish() // Close MainActivity if desired
                 } else {
                     Toast.makeText(this, "Registration failed. ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }

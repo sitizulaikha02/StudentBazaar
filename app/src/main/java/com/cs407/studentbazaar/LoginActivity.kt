@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -25,29 +24,28 @@ class LoginActivity : AppCompatActivity() {
         val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
         val loginButton = findViewById<Button>(R.id.signupButton) // This is your login button in XML
         val signUpRedirectButton = findViewById<Button>(R.id.signupRedirect)
-        val errorTextView = findViewById<TextView>(R.id.errorTextView)
 
         // Login Button Click - To Sign In User
         loginButton.setOnClickListener {
             val email = usernameEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
 
+            // Check if the email and password fields are empty
             if (email.isEmpty() || password.isEmpty()) {
-                errorTextView.text = "Please fill out all fields."
-                errorTextView.visibility = TextView.VISIBLE
+                Toast.makeText(this, "Please fill out all fields.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
-            } else {
-                errorTextView.visibility = TextView.GONE
             }
 
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Sign-in successful.", Toast.LENGTH_SHORT).show()
-                        // Redirect to the next screen after successful login
+                        // Redirect to UserPreferencesActivity after successful login
+                        val intent = Intent(this, UserPreferencesActivity::class.java)
+                        startActivity(intent)
+                        finish() // Optional: Close LoginActivity if you want to prevent going back
                     } else {
-                        errorTextView.text = "Authentication failed. Please try again."
-                        errorTextView.visibility = TextView.VISIBLE
+                        Toast.makeText(this, "Authentication failed. Please try again.", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
@@ -59,4 +57,3 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 }
-
