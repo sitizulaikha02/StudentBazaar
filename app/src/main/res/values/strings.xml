@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">Student Bazaar</string>
-    <string name="greeting_signup">Welcome to Student Bazaar!</string>
-    <string name="greeting_login">Welcome Back to Student Bazaar!</string>
+    <string name="greeting_signup">WELCOME TO STUDENT BAZAAR</string>
+    <string name="greeting_login">WELCOME BACK TO STUDENT BAZAAR</string>
     <string name="question_signup">Have an account? Log in below!</string>
     <string name="question_login">New here? Sign up below</string>
     <string name="username_hint">Enter Username</string>
     <string name="password_hint">Enter Password</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="login_button">Log In</string>
     <string name="signup_button">Sign Up</string>
     <string name="fail_login">Wrong Username or Password</string>
