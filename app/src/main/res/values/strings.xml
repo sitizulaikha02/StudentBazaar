@@ -17,4 +17,5 @@
     <string name="logout">Log Out</string>
     <string name="delete_account">Delete Account</string>
     <string name="userPasswdKV">com.cs407.studentBazaar.userPasswdKV</string>
+    <string name="back">Back</string>
 </resources>

@@ -7,4 +7,91 @@
     android:layout_height="match_parent"
     tools:context=".UserPreferencesActivity">
 
+    <!-- res/layout/activity_preferences.xml -->
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal"
+        android:background="#FFFFFF">
+
+        <!-- Back Button -->
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:contentDescription="@string/back"
+            android:layout_gravity="start"/>
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose your preferences"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal" />
+
+        <!-- Preferences Options -->
+        <GridLayout
+            android:id="@+id/gridLayoutPreferences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rowCount="3"
+            android:columnCount="2"
+            android:layout_marginTop="32dp">
+
+            <CheckBox
+                android:id="@+id/cbTechnology"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Technology" />
+
+            <CheckBox
+                android:id="@+id/cbFurniture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Furniture" />
+
+            <CheckBox
+                android:id="@+id/cbClothing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clothing" />
+
+            <CheckBox
+                android:id="@+id/cbBooks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Books" />
+
+            <CheckBox
+                android:id="@+id/cbAccessories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Accessories" />
+
+            <CheckBox
+                android:id="@+id/cbSports"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sports" />
+        </GridLayout>
+
+        <!-- Action Button -->
+        <Button
+            android:id="@+id/btnShowGoods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show me the goods!"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#D96E5E"
+            android:layout_marginTop="24dp" />
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
