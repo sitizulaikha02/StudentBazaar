@@ -19,4 +19,12 @@
     <string name="delete_account">Delete Account</string>
     <string name="userPasswdKV">com.cs407.studentBazaar.userPasswdKV</string>
     <string name="back">Back</string>
+    <string name="username_format">\@%s</string>
+    <string name="edit_profile_button">Edit profile</string>
+    <string name="listing_display">Listing</string>
+    <string name="followers_display">Followers</string>
+    <string name="following_display">Following</string>
+    <string name="name_edit">Name</string>
+    <string name="username_edit">Username</string>
+    <string name="bio_edit">Bio</string>
 </resources>

@@ -4,7 +4,172 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".UserProfileActivity">
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/profile_picture"
+                    android:layout_width="86dp"
+                    android:layout_height="76dp"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginBottom="9dp"
+                    app:layout_constraintBottom_toTopOf="@+id/displayName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/default_profile_picture" />
+
+                <TextView
+                    android:id="@+id/displayName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/username"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_picture"
+                    app:layout_constraintStart_toStartOf="@+id/profile_picture"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_picture" />
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="\@noname"
+                    android:textColorLink="#29FFFFFF"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/displayName"
+                    app:layout_constraintStart_toStartOf="@+id/displayName"
+                    app:layout_constraintTop_toBottomOf="@+id/displayName" />
+
+                <Button
+                    android:id="@+id/editProfileButton"
+                    android:layout_width="143dp"
+                    android:layout_height="48dp"
+                    android:layout_margin="8dp"
+                    android:text="@string/edit_profile_button"
+                    app:layout_constraintBottom_toTopOf="@id/linearLayout2"
+                    app:layout_constraintEnd_toEndOf="@id/bio"
+                    app:layout_constraintHorizontal_bias="0.512"
+                    app:layout_constraintStart_toStartOf="@id/bio"
+                    app:layout_constraintTop_toBottomOf="@id/bio" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="375dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="13dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+                    app:layout_constraintLeft_toLeftOf="@id/editProfileButton"
+                    app:layout_constraintRight_toRightOf="@id/editProfileButton"
+                    app:layout_constraintTop_toBottomOf="@id/editProfileButton">
+
+                    <LinearLayout
+                        android:layout_width="125dp"
+                        android:layout_height="42dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/listingCount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="5"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView13"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="@string/listing_display" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="125dp"
+                        android:layout_height="42dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/followersCount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="147"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView15"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="@string/followers_display" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="125dp"
+                        android:layout_height="42dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/followingCount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="83"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="@string/following_display" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/bio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:minHeight="10dp"
+                    app:layout_constraintBottom_toTopOf="@id/editProfileButton"
+                    app:layout_constraintLeft_toLeftOf="@id/username"
+                    app:layout_constraintRight_toRightOf="@id/username"
+                    app:layout_constraintTop_toBottomOf="@id/username" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

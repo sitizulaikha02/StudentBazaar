@@ -1,6 +1,7 @@
 package com.cs407.studentbazaar
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
@@ -37,6 +38,10 @@ class UserPreferencesActivity : AppCompatActivity() {
         btnShowGoods.setOnClickListener {
             savePreferences()
             // Perform any additional actions, such as navigating to another activity
+            // PLACEHOLDER : NAVIGATE TO USER PROFILE FOR TESTING PURPOSES (Change as needed)
+            val intent = Intent(this, UserProfileActivity::class.java)
+            startActivity(intent)
+
         }
 
         // Enable edge-to-edge display
