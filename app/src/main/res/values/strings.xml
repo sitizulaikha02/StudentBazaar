@@ -27,4 +27,10 @@
     <string name="name_edit">Name</string>
     <string name="username_edit">Username</string>
     <string name="bio_edit">Bio</string>
+    <string name="search_hint">Search here</string>
+    <string name="greeting_home">Welcome %1$s!</string>
+    <string name="new_switch">New</string>
+    <string name="nearby_switch">Nearby</string>
+    <string name="pricelow_switch">Price low</string>
+    <string name="pricehigh_switch">Price high</string>
 </resources>
