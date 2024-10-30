@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:autofillHints="@string/search_hint"
+    tools:context=".HomepageActivity">
+
+    <ImageButton
+        android:id="@+id/usernameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="19dp"
+        app:layout_constraintEnd_toStartOf="@+id/searchBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/default_profile_picture" />
+
+    <SearchView
+        android:id="@+id/searchBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="9dp"
+        android:queryHint="@string/search_hint"
+        app:layout_constraintBottom_toTopOf="@+id/greetingHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/usernameButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newSwitch" />
+
+    <TextView
+        android:id="@+id/greetingHome"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/greeting_home"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/newSwitch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameButton" />
+
+    <Switch
+        android:id="@+id/newSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/new_switch"
+        app:layout_constraintBaseline_toBaselineOf="@+id/nearbySwitch"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Switch
+        android:id="@+id/nearbySwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="51dp"
+        android:text="@string/nearby_switch"
+        app:layout_constraintStart_toEndOf="@+id/newSwitch"
+        app:layout_constraintTop_toBottomOf="@+id/usernameButton" />
+
+    <Switch
+        android:id="@+id/priceLowSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pricelow_switch"
+        app:layout_constraintBaseline_toBaselineOf="@+id/nearbySwitch"
+        app:layout_constraintStart_toEndOf="@+id/nearbySwitch" />
+
+    <Switch
+        android:id="@+id/priceHighSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/pricehigh_switch"
+        app:layout_constraintBaseline_toBaselineOf="@+id/priceLowSwitch"
+        app:layout_constraintStart_toEndOf="@+id/priceLowSwitch" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
