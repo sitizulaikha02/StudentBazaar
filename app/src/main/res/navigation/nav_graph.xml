@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/signupFragment">
+
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.cs407.studentbazaar.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_signupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_userPreferencesFragment"
+            app:destination="@id/userPreferencesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.cs407.studentbazaar.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_homepageFragment"
+            app:destination="@id/HomepageFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userPreferencesFragment"
+        android:name="com.cs407.studentbazaar.UserPreferencesFragment"
+        android:label="fragment_user_preferences"
+        tools:layout="@layout/fragment_user_preferences" >
+        <action
+            android:id="@+id/action_userPreferencesFragment_to_homepageFragment"
+            app:destination="@id/HomepageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/HomepageFragment"
+        android:name="com.cs407.studentbazaar.HomepageFragment"
+        android:label="fragment_homepage"
+        tools:layout="@layout/fragment_homepage" >
+        <action
+            android:id="@+id/action_homepageFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.cs407.studentbazaar.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile" >
+        <action
+            android:id="@+id/action_userProfileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.cs407.studentbazaar.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
+</navigation>
