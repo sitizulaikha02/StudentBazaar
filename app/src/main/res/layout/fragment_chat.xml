@@ -28,12 +28,12 @@
 
         <!-- Title in the middle -->
         <TextView
-            android:id="@+id/title_text"
+            android:id="@+id/chat_title"
             android:layout_width="285dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Message"
+            android:text="@string/chat_title"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 

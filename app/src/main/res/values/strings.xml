@@ -33,4 +33,6 @@
     <string name="nearby_switch">Nearby</string>
     <string name="pricelow_switch">Price low</string>
     <string name="pricehigh_switch">Price high</string>
+    <string name="chat_title">Message</string>
+    <string name="cart_title">Cart</string>
 </resources>
