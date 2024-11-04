@@ -35,4 +35,11 @@
     <string name="pricehigh_switch">Price high</string>
     <string name="chat_title">Message</string>
     <string name="cart_title">Cart</string>
+    <string name="publish_title">Publish</string>
+    <string name="item_title">Item name</string>
+    <string name="item_price">Price</string>
+    <string name="item_publish">List Item</string>
+    <string name="item_label">Label:</string>
+    <string name="item_condition">Condition:</string>
+    <string name="item_description">Description:</string>
 </resources>

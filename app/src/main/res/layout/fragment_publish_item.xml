@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PublishItemFragment">
+
+    <!-- Title bar with back button, title, and profile icon -->
+    <LinearLayout
+        android:id="@+id/title_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginBottom="12dp"
+        android:background="?attr/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/itemImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Back button -->
+        <ImageButton
+            android:id="@+id/button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Back"
+            android:padding="8dp"
+            android:src="@drawable/ic_back" />
+
+        <!-- Title in the middle -->
+        <TextView
+            android:id="@+id/publish_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/publish_title"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <!-- Profile icon on the right -->
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Profile"
+            android:src="@drawable/default_profile_picture" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/itemImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="3dp"
+        android:src="@android:drawable/ic_menu_camera"
+        app:layout_constraintBottom_toTopOf="@+id/itemPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_bar" />
+
+    <TextView
+        android:id="@+id/itemTitle"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="43dp"
+        android:text="@string/item_title"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/itemPrice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.479" />
+
+    <TextView
+        android:id="@+id/itemPrice"
+        android:layout_width="152dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/item_price"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/itemLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/itemTitle"
+        app:layout_constraintTop_toBottomOf="@+id/itemImage" />
+
+    <Button
+        android:id="@+id/listItemButton"
+        android:layout_width="348dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="42dp"
+        android:text="@string/item_publish"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemDescription" />
+
+    <TextView
+        android:id="@+id/itemLabel"
+        android:layout_width="343dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="3dp"
+        android:text="@string/item_label"
+        app:layout_constraintBottom_toTopOf="@+id/itemCondition"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemPrice" />
+
+    <TextView
+        android:id="@+id/itemCondition"
+        android:layout_width="348dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/item_condition"
+        app:layout_constraintBottom_toTopOf="@+id/itemDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemLabel" />
+
+    <TextView
+        android:id="@+id/itemDescription"
+        android:layout_width="344dp"
+        android:layout_height="111dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="36dp"
+        android:text="@string/item_description"
+        app:layout_constraintBottom_toTopOf="@+id/listItemButton"
+        app:layout_constraintEnd_toEndOf="@+id/itemCondition"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/itemCondition"
+        app:layout_constraintTop_toBottomOf="@+id/itemCondition" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
