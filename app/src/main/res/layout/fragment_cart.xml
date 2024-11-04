@@ -1,77 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".CartFragment">
-
-<!-- Title bar with back button, title, and profile icon -->
-<LinearLayout
-    android:id="@+id/title_bar"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp"
-    android:background="?attr/colorPrimary"
-    android:gravity="center_vertical"
-    android:layout_gravity="top">
+    android:layout_height="match_parent"
+    tools:context=".CartFragment">
 
-    <!-- Back button -->
-    <ImageButton
-        android:id="@+id/button_back"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/title_bar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_back"
-    android:contentDescription="Back"
-    android:padding="8dp" />
+        android:layout_gravity="top"
+        android:background="?attr/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!-- Title in the middle -->
-    <TextView
-        android:id="@+id/cart_title"
-        android:layout_width="297dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/cart_title"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
+        <!-- Back button -->
+        <ImageButton
+            android:id="@+id/button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Back"
+            android:padding="8dp"
+            android:src="@drawable/ic_back" />
 
-    <!-- Image button on the right-->
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:src="@drawable/default_profile_picture" />
+        <!-- Title in the middle -->
+        <TextView
+            android:id="@+id/cart_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/cart_title"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
 
+        <!-- Profile icon on the right -->
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Profile"
+            android:src="@drawable/default_profile_picture" />
+    </LinearLayout>
 
-</LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView3"
+        android:layout_width="0dp"
+        android:layout_height="554dp"
+        android:layout_marginBottom="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Checkout button at the bottom above BottomAppBar -->
     <Button
-        android:id="@+id/button_checkout"
-        android:layout_width="match_parent"
+        android:id="@+id/checkoutButton"
+        android:layout_width="358dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/checkout_button"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView3" />
+
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Checkout"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="56dp"
-    android:padding="12dp"
-    android:backgroundTint="?attr/colorPrimary"
-    android:textColor="#FFFFFF"
-    android:textSize="16sp" />
+        android:text="@string/home_button"
+        app:layout_constraintBottom_toBottomOf="@+id/accountButton"
+        app:layout_constraintEnd_toStartOf="@+id/chatButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/accountButton"
+        app:layout_constraintTop_toTopOf="@+id/accountButton" />
 
-    <!-- BottomAppBar positioned at the very bottom -->
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottom_app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_gravity="bottom"
-        app:backgroundTint="?attr/colorPrimary"
-        app:fabAlignmentMode="center">
+    <Button
+        android:id="@+id/accountButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/account_button"
+        app:layout_constraintEnd_toStartOf="@+id/homeButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="676dp" />
 
-        <!-- Optional action menu items go here -->
+    <Button
+        android:id="@+id/chatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chat_bottom_button"
+        app:layout_constraintBottom_toBottomOf="@+id/homeButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/homeButton"
+        app:layout_constraintTop_toTopOf="@+id/homeButton" />
 
-    </com.google.android.material.bottomappbar.BottomAppBar>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
