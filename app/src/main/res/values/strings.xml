@@ -46,5 +46,6 @@
     <string name="home_button">Home</string>
     <string name="account_button">Account</string>
     <string name="chat_bottom_button">Chat</string>
+    <string name="app_database">app_database</string>
 
 </resources>

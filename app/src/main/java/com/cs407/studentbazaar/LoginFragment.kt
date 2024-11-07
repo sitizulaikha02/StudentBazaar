@@ -1,5 +1,6 @@
 package com.cs407.studentbazaar
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,19 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.cs407.studentbazaar.data.AppDatabase
+import com.cs407.studentbazaar.data.User
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var database: AppDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +32,7 @@ class LoginFragment : Fragment() {
 
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
+        database = AppDatabase.getDatabase(requireContext())
 
         // Get references to UI components
         val usernameEditText = view.findViewById<EditText>(R.id.usernameEditText)
@@ -46,6 +55,17 @@ class LoginFragment : Fragment() {
                 .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(requireContext(), "Sign-in successful.", Toast.LENGTH_SHORT).show()
+
+                        lifecycleScope.launch {
+                            // Store username in SharedPreferences
+                            val sharedPref = requireContext().getSharedPreferences("WhoAmI", Context.MODE_PRIVATE)
+                            with (sharedPref.edit()) {
+                                putString("EMAIL", email)
+                                apply()
+                            }
+
+                        }
+
                         // Navigate to HomePageFragment after successful login
                         findNavController().navigate(R.id.action_loginFragment_to_homepageFragment)
                     } else {
@@ -54,6 +74,8 @@ class LoginFragment : Fragment() {
                 }
         }
 
+
+
         // Sign Up Button Click - To Redirect to Sign-Up Screen
         signUpRedirectButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
@@ -61,4 +83,5 @@ class LoginFragment : Fragment() {
 
         return view
     }
+
 }

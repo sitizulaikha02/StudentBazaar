@@ -10,6 +10,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.cs407.studentbazaar.data.AppDatabase
+import com.cs407.studentbazaar.data.User
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class EditProfileFragment : Fragment() {
 
@@ -18,6 +24,8 @@ class EditProfileFragment : Fragment() {
     private lateinit var editName: EditText
     private lateinit var editUsername: EditText
     private lateinit var editBio: EditText
+    private lateinit var database: AppDatabase
+    private lateinit var currentUserEmail: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +33,13 @@ class EditProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_edit_profile, container, false)
+
+        // Initialize the Room database
+        database = AppDatabase.getDatabase(requireContext())
+
+        // Retrieve the username from SharedPreferences (used as identifier)
+        val sharedPref = requireContext().getSharedPreferences("WhoAmI", Context.MODE_PRIVATE)
+        currentUserEmail = sharedPref.getString("EMAIL", "") ?: ""
 
         // Initialize UI components
         backButton = view.findViewById(R.id.backButton)
@@ -51,10 +66,21 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun loadProfileData() {
-        val sharedPref = requireContext().getSharedPreferences("UserProfileData", Context.MODE_PRIVATE)
-        editName.setText(sharedPref.getString("NAME", ""))
-        editUsername.setText(sharedPref.getString("USERNAME", ""))
-        editBio.setText(sharedPref.getString("BIO", ""))
+        // Launch a coroutine to fetch data from the Room database
+        lifecycleScope.launch {
+            val userData = getUserFromDatabase(currentUserEmail)
+            userData.let {
+                editName.setText(it.name)
+                editUsername.setText(it.username)
+                editBio.setText(it.bio)
+            }
+        }
+    }
+
+    private suspend fun getUserFromDatabase(userEmail: String): User {
+        return withContext(Dispatchers.IO) {
+            database.userDao().getByEmail(userEmail)
+        }
     }
 
     private fun saveProfileData() {
@@ -62,12 +88,15 @@ class EditProfileFragment : Fragment() {
         val username = editUsername.text.toString()
         val bio = editBio.text.toString()
 
-        val sharedPref = requireContext().getSharedPreferences("UserProfileData", Context.MODE_PRIVATE)
-        with(sharedPref.edit()) {
-            putString("NAME", name)
-            putString("USERNAME", username)
-            putString("BIO", bio)
-            apply()
+        // Update the database with the new profile information
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                database.userDao().updateProfile(
+                    email = currentUserEmail,
+                    newUsername = username,
+                    name = name,
+                    bio = bio)
+            }
         }
     }
 }
