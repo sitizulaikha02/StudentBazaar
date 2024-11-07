@@ -39,6 +39,11 @@ android {
 }
 
 dependencies {
+
+
+//    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.2")
+//    implementation ("androidx.navigation:navigation-ui-ktx:2.7.2")
+
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
 
     implementation("com.google.firebase:firebase-analytics")

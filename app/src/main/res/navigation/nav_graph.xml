@@ -5,6 +5,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/signupFragment">
 
+    <!-- Signup Fragment -->
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.cs407.studentbazaar.SignupFragment"
@@ -17,6 +18,8 @@
             android:id="@+id/action_signupFragment_to_userPreferencesFragment"
             app:destination="@id/userPreferencesFragment" />
     </fragment>
+
+    <!-- Login Fragment -->
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.cs407.studentbazaar.LoginFragment"
@@ -29,6 +32,8 @@
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
     </fragment>
+
+    <!-- User Preferences Fragment -->
     <fragment
         android:id="@+id/userPreferencesFragment"
         android:name="com.cs407.studentbazaar.UserPreferencesFragment"
@@ -38,6 +43,8 @@
             android:id="@+id/action_userPreferencesFragment_to_homepageFragment"
             app:destination="@id/HomepageFragment" />
     </fragment>
+
+    <!-- Homepage Fragment -->
     <fragment
         android:id="@+id/HomepageFragment"
         android:name="com.cs407.studentbazaar.HomepageFragment"
@@ -47,6 +54,8 @@
             android:id="@+id/action_homepageFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
     </fragment>
+
+    <!-- User Profile Fragment -->
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.cs407.studentbazaar.UserProfileFragment"
@@ -59,6 +68,8 @@
             android:id="@+id/action_userProfileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+
+    <!-- Edit Profile Fragment -->
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.cs407.studentbazaar.EditProfileFragment"
@@ -68,4 +79,27 @@
             android:id="@+id/action_editProfileFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
     </fragment>
+
+    <!-- Chat Fragment -->
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.cs407.studentbazaar.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat">
+        <action
+            android:id="@+id/action_chatFragment_to_meetupFragment"
+            app:destination="@id/meetupFragment" />
+    </fragment>
+
+    <!-- Meetup Fragment -->
+    <fragment
+        android:id="@+id/meetupFragment"
+        android:name="com.cs407.studentbazaar.MeetupFragment"
+        android:label="fragment_map_meetup"
+        tools:layout="@layout/fragment_map_meetup" >
+        <action
+            android:id="@+id/action_meetupFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+
 </navigation>

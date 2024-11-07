@@ -67,4 +67,6 @@ class ChatFragment : Fragment() {
             findNavController().navigate(R.id.action_chatFragment_to_meetupFragment)
         }
     }
+
+
 }
