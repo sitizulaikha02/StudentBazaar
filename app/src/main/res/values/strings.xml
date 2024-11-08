@@ -47,5 +47,5 @@
     <string name="account_button">Account</string>
     <string name="chat_bottom_button">Chat</string>
     <string name="app_database">app_database</string>
-
+    <string name="publish_item">Publish</string>
 </resources>

@@ -39,7 +39,7 @@ android {
 
 dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
-
+    implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-analytics")
 
     implementation(libs.androidx.core.ktx)
@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.paging)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.firebase.storage.ktx)
 
     // To use Kotlin Symbol Processing (KSP)
     ksp(libs.androidx.room.compiler)

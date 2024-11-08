@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_homepageFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_homepageFragment_to_publishItemFragment"
+            app:destination="@id/publishItemFragment" />
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
@@ -68,4 +71,12 @@
             android:id="@+id/action_editProfileFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/publishItemFragment"
+        android:name="com.cs407.studentbazaar.PublishItemFragment"
+        android:label="fragment_publish_item"
+        tools:layout="@layout/fragment_publish_item" />
+        <action
+        android:id="@+id/action_publishItemFragment_to_userProfileFragment"
+        app:destination="@id/userProfileFragment" />
 </navigation>

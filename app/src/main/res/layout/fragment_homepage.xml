@@ -25,9 +25,9 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="14dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginBottom="563dp"
         android:queryHint="@string/search_hint"
-        app:layout_constraintBottom_toTopOf="@+id/greetingHome"
+        app:layout_constraintBottom_toTopOf="@+id/publish_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/usernameButton"
         app:layout_constraintTop_toTopOf="parent" />
@@ -91,5 +91,16 @@
         android:text="@string/pricehigh_switch"
         app:layout_constraintBaseline_toBaselineOf="@+id/priceLowSwitch"
         app:layout_constraintStart_toEndOf="@+id/priceLowSwitch" />
+
+    <Button
+        android:id="@+id/publish_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="62dp"
+        android:text="@string/publish_item"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBox" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
