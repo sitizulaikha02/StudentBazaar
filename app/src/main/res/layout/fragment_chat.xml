@@ -37,12 +37,15 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
+        <!-- Add this inside your existing layout -->
+
         <ImageButton
             android:id="@+id/imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/default_profile_picture" />
+
     </LinearLayout>
 
     <!-- RecyclerView to display chat messages, positioned below the title bar -->
@@ -85,6 +88,13 @@
             android:layout_height="wrap_content"
             android:text="Send"
             android:layout_gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/button_meetup"
+            android:layout_width="70dp"
+            android:layout_height="63dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Set Meetup Location" />
     </LinearLayout>
 
 </FrameLayout>
