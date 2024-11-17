@@ -79,4 +79,18 @@
         <action
         android:id="@+id/action_publishItemFragment_to_userProfileFragment"
         app:destination="@id/userProfileFragment" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.cs407.studentbazaar.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_chatFragment_to_meetupFragment"
+            app:destination="@id/meetupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/meetupFragment"
+        android:name="com.cs407.studentbazaar.MeetupFragment"
+        android:label="fragment_meetup"
+        tools:layout="@layout/fragment_map_meetup" />
 </navigation>

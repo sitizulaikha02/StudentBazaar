@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/itemImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="8dp"
+        android:scaleType="centerCrop" />
+
+    <!-- Item Title -->
+    <TextView
+        android:id="@+id/itemTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Item Title"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Item Price -->
+    <TextView
+        android:id="@+id/itemPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="$100.00"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Item Condition -->
+    <TextView
+        android:id="@+id/itemCondition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Used - Good Condition"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Item Label (Optional, can be used for sale/free, etc.) -->
+    <TextView
+        android:id="@+id/itemLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="For Sale"
+        android:textSize="14sp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Item Description -->
+    <TextView
+        android:id="@+id/itemDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Short description of the item goes here."
+        android:textSize="12sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginBottom="8dp"
+        android:maxLines="3"
+        android:ellipsize="end" />
+
+</LinearLayout>
