@@ -48,4 +48,8 @@
     <string name="chat_bottom_button">Chat</string>
     <string name="app_database">app_database</string>
     <string name="publish_item">Publish</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="item_view_title">View Item</string>
+    <string name="add_cart_button">Add to Cart</string>
+    <string name="message_seller_button">Message Seller</string>
 </resources>
