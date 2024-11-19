@@ -48,4 +48,5 @@
     <string name="chat_bottom_button">Chat</string>
     <string name="app_database">app_database</string>
     <string name="publish_item">Publish</string>
+    <string name="google_maps_api_key">your_actual_api_key</string>
 </resources>
