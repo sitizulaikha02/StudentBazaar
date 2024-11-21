@@ -12,15 +12,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:layout_marginBottom="12dp"
         android:background="?attr/colorPrimary"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/itemImage"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Back button -->
         <ImageButton
@@ -51,103 +49,98 @@
             android:src="@drawable/default_profile_picture" />
     </LinearLayout>
 
+    <!-- Image view -->
     <ImageView
         android:id="@+id/itemImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="3dp"
+        android:layout_width="362dp"
+        android:layout_height="255dp"
         android:src="@android:drawable/ic_menu_camera"
-        app:layout_constraintBottom_toTopOf="@+id/itemPrice"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_bar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_bar" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
 
-    <!-- Change itemTitle to EditText for user input -->
+    <!-- Item Title -->
     <EditText
         android:id="@+id/itemTitle"
-        android:layout_width="0dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="43dp"
+        android:layout_width="177dp"
+        android:layout_height="47dp"
         android:hint="@string/item_title"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/itemPrice"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/itemImage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.479" />
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp" />
 
-    <!-- Change itemPrice to EditText for user input -->
+    <!-- Item Price -->
     <EditText
         android:id="@+id/itemPrice"
         android:layout_width="152dp"
         android:layout_height="46dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="16dp"
         android:hint="@string/item_price"
-        android:textSize="34sp"
         android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/itemLabel"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="@id/itemTitle"
+        app:layout_constraintStart_toEndOf="@id/itemTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/itemTitle"
-        app:layout_constraintTop_toBottomOf="@+id/itemImage" />
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp" />
+
+    <!-- Publish Button -->
+    <EditText
+        android:id="@+id/itemLabel"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="32dp"
+        android:hint="@string/item_label"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/itemTitle" />
+
+    <EditText
+        android:id="@+id/itemCondition"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="32dp"
+        android:hint="@string/item_condition"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/itemLabel" />
+
+    <EditText
+        android:id="@+id/itemDescription"
+        android:layout_width="0dp"
+        android:layout_height="129dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="32dp"
+        android:hint="@string/item_description"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/itemCondition" />
 
     <Button
         android:id="@+id/listItemButton"
-        android:layout_width="348dp"
+        android:layout_width="0dp"
         android:layout_height="49dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="42dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
         android:text="@string/item_publish"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemDescription" />
+        app:layout_constraintTop_toBottomOf="@id/itemDescription" />
 
-    <!-- Change itemLabel to EditText for user input -->
-    <EditText
-        android:id="@+id/itemLabel"
-        android:layout_width="343dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="31dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="3dp"
-        android:hint="@string/item_label"
-        app:layout_constraintBottom_toTopOf="@+id/itemCondition"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemPrice" />
-
-    <!-- Change itemCondition to EditText for user input -->
-    <EditText
-        android:id="@+id/itemCondition"
-        android:layout_width="348dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="4dp"
-        android:hint="@string/item_condition"
-        app:layout_constraintBottom_toTopOf="@+id/itemDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemLabel" />
-
-    <!-- Change itemDescription to EditText for user input -->
-    <EditText
-        android:id="@+id/itemDescription"
-        android:layout_width="344dp"
-        android:layout_height="111dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="36dp"
-        android:hint="@string/item_description"
-        app:layout_constraintBottom_toTopOf="@+id/listItemButton"
-        app:layout_constraintEnd_toEndOf="@+id/itemCondition"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/itemCondition"
-        app:layout_constraintTop_toBottomOf="@+id/itemCondition" />
 </androidx.constraintlayout.widget.ConstraintLayout>

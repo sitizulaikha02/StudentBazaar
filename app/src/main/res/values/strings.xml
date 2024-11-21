@@ -66,4 +66,8 @@
     <string name="click">Click here</string>
     <string name="follow">Follow</string>
     <string name="like">Like</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="item_view_title">View Item</string>
+    <string name="add_cart_button">Add to Cart</string>
+    <string name="message_seller_button">Message Seller</string>
 </resources>

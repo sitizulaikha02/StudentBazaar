@@ -17,6 +17,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Retrieve the Google Maps API key from the local.properties file
+        val googleMapsApiKey = project.findProperty("GOOGLE_MAPS_API_KEY") as String? ?: ""
+        buildConfigField("String", "GOOGLE_MAPS_API_KEY", "\"$googleMapsApiKey\"")
+        resValue("string", "google_maps_api_key", googleMapsApiKey)
     }
 
     buildTypes {
@@ -28,6 +33,11 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        buildConfig = true // Enable BuildConfig fields
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -42,6 +52,10 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-analytics")
 
+
+    implementation("com.github.bumptech.glide:glide:4.15.1")  // Latest Glide version
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1") // For annotation processing
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -55,6 +69,8 @@ dependencies {
     implementation(libs.androidx.room.paging)
     implementation(libs.androidx.room.runtime)
     implementation(libs.firebase.storage.ktx)
+    implementation(libs.play.services.location)
+    implementation(libs.play.services.maps)
 
     // To use Kotlin Symbol Processing (KSP)
     ksp(libs.androidx.room.compiler)
