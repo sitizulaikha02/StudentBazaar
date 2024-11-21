@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.cs407.studentbazaar.R
 import com.cs407.studentbazaar.data.PublishedItem
 
@@ -39,12 +40,30 @@ class PublishedItemAdapter(private val items: List<PublishedItem>) : RecyclerVie
             itemCondition.text = item.condition // Binding the new condition field
             itemDescription.text = item.description // Binding the new description field
 
-            // Load the image using Glide if available
+            // If imageUrl is provided, load it using Glide with resizing
             if (item.imageUrl != null) {
-                Glide.with(itemView.context).load(item.imageUrl).into(itemImage)
+                Glide.with(itemView.context)
+                    .load(item.imageUrl)
+                    .apply(RequestOptions().override(200, 200).fitCenter()) // Resize to 800x800 pixels (you can adjust this size)
+                    .into(itemImage)
             } else {
-                itemImage.setImageDrawable(null) // Placeholder if no image
+                // If imageUrl is null, select a random default image from local resources
+                val defaultImageResId = getDefaultImageResource()
+                itemImage.setImageResource(defaultImageResId)
             }
+        }
+
+        // Function to randomly pick a local image from a predefined set of images
+        private fun getDefaultImageResource(): Int {
+            // Replace with your actual drawable resource IDs for default images
+            val imageResources = listOf(
+                R.drawable.book, // Local images for fallback
+                R.drawable.desk,
+                R.drawable.fan,
+                R.drawable.mirror,
+                R.drawable.tv
+            )
+            return imageResources.random() // Randomly select one of the images
         }
     }
 }
