@@ -8,29 +8,28 @@
     android:autofillHints="@string/search_hint"
     tools:context=".HomepageFragment">
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchBox"
+        android:layout_width="336dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp"
+        android:queryHint="@string/search_hint"
+        app:layout_constraintBottom_toTopOf="@+id/greetingHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.142"
+        app:layout_constraintStart_toEndOf="@+id/usernameButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
+
     <ImageButton
         android:id="@+id/usernameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
-        android:layout_marginTop="19dp"
-        app:layout_constraintEnd_toStartOf="@+id/searchBox"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/default_profile_picture" />
-
-    <SearchView
-        android:id="@+id/searchBox"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="563dp"
-        android:queryHint="@string/search_hint"
-        app:layout_constraintBottom_toTopOf="@+id/publish_item"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/usernameButton"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView2"
@@ -54,8 +53,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/newSwitch"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameButton" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameButton"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Switch
         android:id="@+id/newSwitch"
@@ -100,7 +101,7 @@
         android:text="@string/publish_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBox" />
+        app:layout_constraintHorizontal_bias="0.539"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

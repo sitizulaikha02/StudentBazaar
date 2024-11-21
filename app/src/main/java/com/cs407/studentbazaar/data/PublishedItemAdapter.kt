@@ -66,4 +66,11 @@ class PublishedItemAdapter(private val items: List<PublishedItem>) : RecyclerVie
             return imageResources.random() // Randomly select one of the images
         }
     }
+
+    fun updateItems(newItems: List<PublishedItem>) {
+        (items as MutableList).clear()
+        items.addAll(newItems)
+        notifyDataSetChanged()
+    }
+
 }
