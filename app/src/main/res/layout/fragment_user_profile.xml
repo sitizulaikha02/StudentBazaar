@@ -85,6 +85,20 @@
                     app:layout_constraintStart_toStartOf="@id/bio"
                     app:layout_constraintTop_toBottomOf="@id/bio" />
 
+                <!--Follow button for other user-->
+                <Button
+                    android:id="@+id/followButton"
+                    android:layout_width="143dp"
+                    android:layout_height="48dp"
+                    android:layout_margin="8dp"
+                    android:visibility="gone"
+                    android:text="@string/follow"
+                    app:layout_constraintBottom_toTopOf="@id/linearLayout2"
+                    app:layout_constraintEnd_toEndOf="@id/bio"
+                    app:layout_constraintHorizontal_bias="0.512"
+                    app:layout_constraintStart_toStartOf="@id/bio"
+                    app:layout_constraintTop_toBottomOf="@id/bio" />
+
                 <LinearLayout
                     android:id="@+id/linearLayout2"
                     android:layout_width="375dp"
@@ -107,7 +121,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
-                            android:text="5"
                             android:textStyle="bold" />
 
                         <TextView
@@ -128,7 +141,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
-                            android:text="147"
                             android:textStyle="bold" />
 
                         <TextView
@@ -149,7 +161,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
-                            android:text="83"
                             android:textStyle="bold" />
 
                         <TextView
@@ -185,6 +196,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/profile_picture"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/notificationButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_notifications"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    tools:layout_editor_absoluteX="21dp"
+                    tools:layout_editor_absoluteY="24dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

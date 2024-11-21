@@ -3,6 +3,7 @@ package com.cs407.studentbazaar
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +11,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.cs407.studentbazaar.data.AppDatabase
 import com.cs407.studentbazaar.data.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -26,6 +30,8 @@ class EditProfileFragment : Fragment() {
     private lateinit var editBio: EditText
     private lateinit var database: AppDatabase
     private lateinit var currentUserEmail: String
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,8 +54,8 @@ class EditProfileFragment : Fragment() {
         editUsername = view.findViewById(R.id.editUsername)
         editBio = view.findViewById(R.id.editBio)
 
-        // Load existing data into EditTexts
-        loadProfileData()
+        // Load data from SharedViewModel into EditTexts
+        observeViewModel()
 
         // Set click listener for the back button
         backButton.setOnClickListener {
@@ -65,38 +71,52 @@ class EditProfileFragment : Fragment() {
         return view
     }
 
-    private fun loadProfileData() {
-        // Launch a coroutine to fetch data from the Room database
-        lifecycleScope.launch {
-            val userData = getUserFromDatabase(currentUserEmail)
-            userData.let {
-                editName.setText(it.name)
-                editUsername.setText(it.username)
-                editBio.setText(it.bio)
-            }
+    private fun observeViewModel() {
+        sharedViewModel.name.observe(viewLifecycleOwner) { name ->
+            editName.setText(name)
         }
-    }
 
-    private suspend fun getUserFromDatabase(userEmail: String): User {
-        return withContext(Dispatchers.IO) {
-            database.userDao().getByEmail(userEmail)
+        sharedViewModel.username.observe(viewLifecycleOwner) { username ->
+            editUsername.setText(username)
+        }
+
+        sharedViewModel.bio.observe(viewLifecycleOwner) { bio ->
+            editBio.setText(bio)
         }
     }
 
     private fun saveProfileData() {
-        val name = editName.text.toString()
-        val username = editUsername.text.toString()
-        val bio = editBio.text.toString()
+        val updatedName = editName.text.toString()
+        val updatedUsername = editUsername.text.toString()
+        val updatedBio = editBio.text.toString()
 
-        // Update the database with the new profile information
-        lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                database.userDao().updateProfile(
-                    email = currentUserEmail,
-                    newUsername = username,
-                    name = name,
-                    bio = bio)
-            }
+        // Update the SharedViewModel
+        sharedViewModel.setName(updatedName)
+        sharedViewModel.setUsername(updatedUsername)
+        sharedViewModel.setBio(updatedBio)
+
+        // Save to Firestore for persistence
+        val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+        currentUserUid?.let { uid ->
+            val db = FirebaseFirestore.getInstance()
+            val userDocRef = db.collection("users").document(uid)
+
+            val updatedData = mapOf(
+                "name" to updatedName,
+                "username" to updatedUsername,
+                "bio" to updatedBio
+            )
+
+            userDocRef.update(updatedData)
+                .addOnSuccessListener {
+                    Log.d("EditProfileFragment", "Profile updated successfully in Firestore")
+                }
+                .addOnFailureListener { e ->
+                    Log.e(
+                        "EditProfileFragment",
+                        "Error updating profile in Firestore: ${e.message}"
+                    )
+                }
         }
     }
 }
