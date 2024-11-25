@@ -1,5 +1,6 @@
 package com.cs407.studentbazaar.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,10 +42,13 @@ class PublishedItemAdapter(private val items: List<PublishedItem>) : RecyclerVie
             itemDescription.text = item.description // Binding the new description field
 
             // If imageUrl is provided, load it using Glide with resizing
-            if (item.imageUrl != null) {
+            if (item.imageUri != "") {
                 Glide.with(itemView.context)
-                    .load(item.imageUrl)
-                    .apply(RequestOptions().override(200, 200).fitCenter()) // Resize to 800x800 pixels (you can adjust this size)
+                    .load(item.imageUri)
+                    .apply(RequestOptions()
+                        .override(200, 200)
+                        .fitCenter()) // Resize to 800x800 pixels (you can adjust this size)
+                        .error(R.drawable.default_image) // Fallback if the image cannot be loaded
                     .into(itemImage)
             } else {
                 // If imageUrl is null, select a random default image from local resources
@@ -56,14 +60,15 @@ class PublishedItemAdapter(private val items: List<PublishedItem>) : RecyclerVie
         // Function to randomly pick a local image from a predefined set of images
         private fun getDefaultImageResource(): Int {
             // Replace with your actual drawable resource IDs for default images
-            val imageResources = listOf(
-                R.drawable.book, // Local images for fallback
-                R.drawable.desk,
-                R.drawable.fan,
-                R.drawable.mirror,
-                R.drawable.tv
-            )
-            return imageResources.random() // Randomly select one of the images
+//            val imageResources = listOf(
+//                R.drawable.book, // Local images for fallback
+//                R.drawable.desk,
+//                R.drawable.fan,
+//                R.drawable.mirror,
+//                R.drawable.tv
+//            )
+
+            return R.drawable.default_image // Randomly select one of the images
         }
     }
 

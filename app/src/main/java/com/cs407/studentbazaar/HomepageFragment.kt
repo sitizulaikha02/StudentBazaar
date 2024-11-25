@@ -3,14 +3,15 @@ package com.cs407.studentbazaar
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
@@ -41,6 +42,7 @@ class HomepageFragment : Fragment() {
     private lateinit var nearbySwitch: Switch
     private lateinit var priceLowSwitch: Switch
     private lateinit var priceHighSwitch: Switch
+    private lateinit var cartButton: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,6 +70,7 @@ class HomepageFragment : Fragment() {
         nearbySwitch = view.findViewById(R.id.nearbySwitch)
         priceLowSwitch = view.findViewById(R.id.priceLowSwitch)
         priceHighSwitch = view.findViewById(R.id.priceHighSwitch)
+        cartButton = view.findViewById(R.id.cartButton)
 
         // Fetch and display the items from Firestore
         fetchItems()
@@ -79,6 +82,10 @@ class HomepageFragment : Fragment() {
 
         publishItemButton.setOnClickListener {
             findNavController().navigate(R.id.action_homepageFragment_to_publishItemFragment)
+        }
+
+        cartButton.setOnClickListener {
+            findNavController().navigate(R.id.action_HomepageFragment_to_cartFragment)
         }
 
         // Set search and filter listeners
@@ -124,6 +131,7 @@ class HomepageFragment : Fragment() {
                 for (document in querySnapshot.documents) {
                     val item = document.toObject(PublishedItem::class.java)
                     if (item != null) {
+                        Log.d("FetchItems", "Fetched item: ${item.title}, imageUri: ${item.imageUri}")
                         items.add(item)
                     }
                 }

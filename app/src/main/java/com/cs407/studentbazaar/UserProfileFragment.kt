@@ -26,7 +26,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.cs407.studentbazaar.data.AppDatabase
 import com.cs407.studentbazaar.EditProfileFragment
 import com.cs407.studentbazaar.data.UserItem
 import com.cs407.studentbazaar.data.UserItemAdapter
@@ -40,7 +39,6 @@ class UserProfileFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var itemList: ArrayList<UserItem>
     private lateinit var itemAdapter: UserItemAdapter
-    private lateinit var editProfilePage: EditProfileFragment
     private lateinit var editProfileButton: Button
     private lateinit var logoutButton: Button
     private lateinit var nameTextView: TextView // TextView for displaying the name
@@ -49,7 +47,6 @@ class UserProfileFragment : Fragment() {
     private lateinit var listingTextView: TextView
     private lateinit var followersTextView: TextView
     private lateinit var followingTextView: TextView
-    private lateinit var database: AppDatabase
     private lateinit var notificationButton: ImageView
 
     private val sharedViewModel: SharedViewModel by activityViewModels()

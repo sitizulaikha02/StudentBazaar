@@ -13,8 +13,6 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.cs407.studentbazaar.data.AppDatabase
-import com.cs407.studentbazaar.data.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +26,6 @@ class EditProfileFragment : Fragment() {
     private lateinit var editName: EditText
     private lateinit var editUsername: EditText
     private lateinit var editBio: EditText
-    private lateinit var database: AppDatabase
     private lateinit var currentUserEmail: String
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
@@ -39,9 +36,6 @@ class EditProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_edit_profile, container, false)
-
-        // Initialize the Room database
-        database = AppDatabase.getDatabase(requireContext())
 
         // Retrieve the username from SharedPreferences (used as identifier)
         val sharedPref = requireContext().getSharedPreferences("WhoAmI", Context.MODE_PRIVATE)

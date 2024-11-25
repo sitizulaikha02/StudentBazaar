@@ -12,8 +12,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.cs407.studentbazaar.data.AppDatabase
-import com.cs407.studentbazaar.data.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
@@ -77,11 +75,16 @@ class SignupFragment : Fragment() {
 
                     saveUserToFirestore(email, username)
 
-                    // Store username in SharedPreferences
-                    val sharedPref = requireContext().getSharedPreferences("WhoAmI", Context.MODE_PRIVATE)
-                    with (sharedPref.edit()) {
-                        putString("EMAIL", email)
-                        apply()
+                    // Save both email and userId to sharedpref
+                    FirebaseAuth.getInstance().currentUser?.let { user ->
+                        val userId = user.uid
+                        val sharedPref = requireContext().getSharedPreferences("WhoAmI", Context.MODE_PRIVATE)
+                        with(sharedPref.edit()) {
+                            putString("EMAIL", email) // Replace email with the actual email value
+                            putString("USER_ID", userId)
+                            apply()
+                        }
+
                     }
 
 
