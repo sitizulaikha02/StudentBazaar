@@ -70,7 +70,7 @@ class HomepageFragment : Fragment() {
         nearbySwitch = view.findViewById(R.id.nearbySwitch)
         priceLowSwitch = view.findViewById(R.id.priceLowSwitch)
         priceHighSwitch = view.findViewById(R.id.priceHighSwitch)
-        cartButton = view.findViewById(R.id.cartButton)
+        //cartButton = view.findViewById(R.id.cartButton)
 
         // Fetch and display the items from Firestore
         fetchItems()
@@ -84,9 +84,9 @@ class HomepageFragment : Fragment() {
             findNavController().navigate(R.id.action_homepageFragment_to_publishItemFragment)
         }
 
-        cartButton.setOnClickListener {
-            findNavController().navigate(R.id.action_HomepageFragment_to_cartFragment)
-        }
+        //cartButton.setOnClickListener {
+        //    findNavController().navigate(R.id.action_HomepageFragment_to_cartFragment)
+        //}
 
         // Set search and filter listeners
         setSearchAndFilterListeners()

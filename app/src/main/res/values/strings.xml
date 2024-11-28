@@ -62,11 +62,9 @@
     <string name="hide_on_lockscreen">Hide content when locked</string>
     <string name="reply">Reply</string>
     <string name="replied">Replied: %1$s (to message %2$d)</string>
-    <!-- Placeholder texts -->
     <string name="click">Click here</string>
     <string name="follow">Follow</string>
     <string name="like">Like</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="item_view_title">View Item</string>
     <string name="add_cart_button">Add to Cart</string>
     <string name="message_seller_button">Message Seller</string>

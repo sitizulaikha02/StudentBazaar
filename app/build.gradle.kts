@@ -5,6 +5,7 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
+
 android {
     namespace = "com.cs407.studentbazaar"
     compileSdk = 34
@@ -52,8 +53,8 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-analytics")
 
-
-    implementation("com.github.bumptech.glide:glide:4.15.1")  // Latest Glide version
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation(libs.play.services.wallet)  // Latest Glide version
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1") // For annotation processing
 
     implementation(libs.androidx.core.ktx)
