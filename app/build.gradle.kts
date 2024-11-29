@@ -5,6 +5,7 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
+
 android {
     namespace = "com.cs407.studentbazaar"
     compileSdk = 34
@@ -48,41 +49,33 @@ android {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))  // Firebase BOM
-    implementation("com.google.firebase:firebase-firestore-ktx")  // Firestore
-    implementation("com.google.firebase:firebase-storage-ktx")    // Storage
-    implementation("com.google.firebase:firebase-analytics")      // Analytics
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-analytics")
 
-    implementation("com.github.bumptech.glide:glide:4.15.1")      // Glide
-    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation(libs.play.services.wallet)  // Latest Glide version
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1") // For annotation processing
 
-
-
-    // AndroidX Libraries
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    // Firebase Authentication
     implementation(libs.firebase.auth.ktx)
-
-    // AndroidX Navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-
-    // Room Database
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.paging)
     implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler)
-
-    // Google Play Services
+    implementation(libs.firebase.storage.ktx)
     implementation(libs.play.services.location)
     implementation(libs.play.services.maps)
 
-    // Testing
+    // To use Kotlin Symbol Processing (KSP)
+    ksp(libs.androidx.room.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

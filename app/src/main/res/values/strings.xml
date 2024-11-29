@@ -48,7 +48,23 @@
     <string name="chat_bottom_button">Chat</string>
     <string name="app_database">app_database</string>
     <string name="publish_item">Publish</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="listing_count">%s</string>
+    <string name="followers_count">%s</string>
+    <string name="following_count">%s</string>
+    // Notification
+    <string name="notifications">Notifications</string>
+    <string name="send_notification">Send Notification</string>
+    <string name="sender_name">Sender Name</string>
+    <string name="message">Message</string>
+    <string name="please_allow_notification">Please allow all notifications to continue.</string>
+    <string name="channel_name">Chat</string>
+    <string name="channel_description">All chat messages</string>
+    <string name="hide_on_lockscreen">Hide content when locked</string>
+    <string name="reply">Reply</string>
+    <string name="replied">Replied: %1$s (to message %2$d)</string>
+    <string name="click">Click here</string>
+    <string name="follow">Follow</string>
+    <string name="like">Like</string>
     <string name="item_view_title">View Item</string>
     <string name="add_cart_button">Add to Cart</string>
     <string name="message_seller_button">Message Seller</string>

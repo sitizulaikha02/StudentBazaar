@@ -1,5 +1,6 @@
 package com.cs407.studentbazaar
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -29,6 +30,7 @@ class PublishItemFragment : Fragment() {
     private lateinit var itemCondition: EditText
     private lateinit var itemDescription: EditText
     private lateinit var listItemButton: Button
+    private var imageUriString: String? = null
 
     private val PICK_IMAGE_REQUEST = 71
 
@@ -81,7 +83,9 @@ class PublishItemFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == -1) {
             val imageUri = data?.data ?: return
+            Log.d("imageUri: ", "$imageUri")
             itemImage.setImageURI(imageUri)  // Display selected image in ImageView
+            imageUriString = imageUri.toString()
         }
     }
 
@@ -91,6 +95,9 @@ class PublishItemFragment : Fragment() {
         val label = itemLabel.text.toString().trim()
         val condition = itemCondition.text.toString().trim()
         val description = itemDescription.text.toString().trim()
+        val sharedPref = requireContext().getSharedPreferences("WhoAmI", Context.MODE_PRIVATE)
+        val userId =
+            sharedPref.getString("USER_ID", null)?.trim() ?: "" // Fetch userId with a default value of null
 
         // Validate fields
         if (title.isEmpty() || priceStr.isEmpty() || label.isEmpty() || condition.isEmpty() || description.isEmpty()) {
@@ -109,7 +116,10 @@ class PublishItemFragment : Fragment() {
             "price" to price,
             "label" to label,
             "condition" to condition,
-            "description" to description
+            "description" to description,
+            "userId" to userId,
+            "imageUri" to (imageUriString ?: ""),
+            "timestamp" to System.currentTimeMillis()
         )
 
         addItemToFirestore(itemData)
