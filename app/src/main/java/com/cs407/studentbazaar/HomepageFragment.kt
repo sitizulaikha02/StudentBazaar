@@ -1,6 +1,7 @@
 package com.cs407.studentbazaar
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,23 +60,22 @@ class HomepageFragment : Fragment() {
     }
 
     private fun fetchItems() {
-        // Fetch all items from Firestore collection 'items'
         firestore.collection("items")
-            .get()  // Get the data from Firestore
+            .get()
             .addOnSuccessListener { querySnapshot ->
-                items.clear() // Clear current items in the list
+                items.clear()
                 for (document in querySnapshot.documents) {
                     val item = document.toObject(PublishedItem::class.java)
                     if (item != null) {
-                        items.add(item) // Add the item to the list
+                        items.add(item)
                     }
                 }
-                // Notify the adapter that the data has changed
+                // Notify the adapter that data has changed
                 adapter.notifyDataSetChanged()
             }
             .addOnFailureListener { e ->
-                // Show error message if data fetch fails
                 Toast.makeText(requireContext(), "Failed to load items: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
+
 }

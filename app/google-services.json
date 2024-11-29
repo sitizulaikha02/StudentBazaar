@@ -2,28 +2,9 @@
   "project_info": {
     "project_number": "596614907579",
     "project_id": "secondhandmarketplaceapp",
-    "storage_bucket": "secondhandmarketplaceapp.appspot.com"
+    "storage_bucket": "secondhandmarketplaceapp.firebasestorage.app"
   },
   "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:596614907579:android:f428ad7fcd748106c30b9e",
-        "android_client_info": {
-          "package_name": "com.cs407.studentbazaar"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCWaTnzdJIpfn63sqvNkdiviHh-ul13yUE"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:596614907579:android:25e5a25fc05593d5c30b9e",
