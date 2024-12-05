@@ -19,6 +19,8 @@ roomKtx = "2.6.1"
 firebaseStorageKtx = "21.0.1"
 playServicesLocation = "21.3.0"
 playServicesMaps = "19.0.0"
+cardEntry = "1.6.1"
+playServicesWallet = "19.4.0"
 firebaseDatabase = "21.0.0"
 
 [libraries]
@@ -41,6 +43,8 @@ firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
+card-entry = { group = "com.squareup.sdk.in-app-payments", name = "card-entry", version.ref = "cardEntry" }
+play-services-wallet = { group = "com.google.android.gms", name = "play-services-wallet", version.ref = "playServicesWallet" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

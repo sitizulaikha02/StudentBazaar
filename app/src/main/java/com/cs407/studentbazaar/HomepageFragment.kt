@@ -56,8 +56,21 @@ class HomepageFragment : Fragment() {
         // Initialize RecyclerView and set the adapter
         recyclerView = view.findViewById(R.id.recyclerView2)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = PublishedItemAdapter(items.toMutableList())
+        adapter = PublishedItemAdapter(items.toMutableList()) { selectedItem ->
+            // Navigate to ViewItemFragment and pass the selected item's data
+            val bundle = Bundle().apply {
+                putString("title", selectedItem.title)
+                putString("description", selectedItem.description)
+                putString("imageUri", selectedItem.imageUri)
+                putDouble("price", selectedItem.price)
+                putString("label", selectedItem.label)
+                putString("condition", selectedItem.condition)
+            }
+            findNavController().navigate(R.id.action_homepageFragment_to_viewItemFragment, bundle)
+        }
         recyclerView.adapter = adapter
+
+        fetchItems()
 
         // Initialize buttons and switches
         usernameButton = view.findViewById(R.id.usernameButton)
@@ -83,7 +96,7 @@ class HomepageFragment : Fragment() {
         }
 
         cartButton.setOnClickListener {
-            findNavController().navigate(R.id.action_HomepageFragment_to_cartFragment)
+            findNavController().navigate(R.id.action_homepageFragment_to_cartFragment)
         }
 
         inboxButton.setOnClickListener {

@@ -17,6 +17,7 @@
             android:id="@+id/action_signupFragment_to_userPreferencesFragment"
             app:destination="@id/userPreferencesFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.cs407.studentbazaar.LoginFragment"
@@ -29,6 +30,7 @@
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/userPreferencesFragment"
         android:name="com.cs407.studentbazaar.UserPreferencesFragment"
@@ -38,6 +40,7 @@
             android:id="@+id/action_userPreferencesFragment_to_homepageFragment"
             app:destination="@id/HomepageFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/HomepageFragment"
         android:name="com.cs407.studentbazaar.HomepageFragment"
@@ -55,7 +58,24 @@
         <action
             android:id="@+id/action_HomepageFragment_to_inboxFragment"
             app:destination="@id/inboxFragment" />
+        <action
+            android:id="@+id/action_homepageFragment_to_viewItemFragment"
+            app:destination="@id/viewItemFragment" />
+        <action
+            android:id="@+id/action_homepageFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/viewItemFragment"
+        android:name="com.cs407.studentbazaar.ViewItemFragment"
+        android:label="fragment_view_item"
+        tools:layout="@layout/fragment_view_item">
+        <action
+            android:id="@+id/action_viewItemFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.cs407.studentbazaar.UserProfileFragment"
@@ -74,6 +94,7 @@
             android:id="@+id/action_userProfileFragment_to_notificationFragment"
             app:destination="@id/notificationFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.cs407.studentbazaar.EditProfileFragment"
@@ -83,14 +104,20 @@
             android:id="@+id/action_editProfileFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/publishItemFragment"
         android:name="com.cs407.studentbazaar.PublishItemFragment"
         android:label="fragment_publish_item"
         tools:layout="@layout/fragment_publish_item" />
         <action
-        android:id="@+id/action_publishItemFragment_to_userProfileFragment"
-        app:destination="@id/userProfileFragment" />
+            android:id="@+id/action_publishItemFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_publishItemFragment_to_homepageFragment"
+            app:destination="@id/HomepageFragment" />
+
+
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.cs407.studentbazaar.NotificationFragment"
@@ -100,17 +127,12 @@
             android:id="@+id/action_notificationFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
     </fragment>
-        <action
-        android:id="@+id/action_publishItemFragment_to_homepageFragment"
-        app:destination="@id/HomepageFragment" />
+
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.cs407.studentbazaar.ChatFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" >
-        <argument
-            android:name="messageId"
-            app:argType="string" />
+        tools:layout="@layout/fragment_chat">
         <action
             android:id="@+id/action_chatFragment_to_meetupFragment"
             app:destination="@id/meetupFragment" />
@@ -121,11 +143,25 @@
             android:id="@+id/action_chatFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/meetupFragment"
         android:name="com.cs407.studentbazaar.MeetupFragment"
         android:label="fragment_meetup"
         tools:layout="@layout/fragment_map_meetup" />
+
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.cs407.studentbazaar.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment_to_homeFragment"
+            app:destination="@id/HomepageFragment" />
+        <action
+            android:id="@+id/action_cartFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.cs407.studentbazaar.CartFragment"

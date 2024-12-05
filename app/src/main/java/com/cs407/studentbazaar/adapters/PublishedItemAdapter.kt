@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.cs407.studentbazaar.R
 
-class PublishedItemAdapter(private val items: List<PublishedItem>) : RecyclerView.Adapter<PublishedItemAdapter.PublishedItemViewHolder>() {
+class PublishedItemAdapter(private val items: List<PublishedItem>, private val onItemClick: (PublishedItem) -> Unit) : RecyclerView.Adapter<PublishedItemAdapter.PublishedItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PublishedItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_published, parent, false)
@@ -53,6 +53,7 @@ class PublishedItemAdapter(private val items: List<PublishedItem>) : RecyclerVie
                 val defaultImageResId = getDefaultImageResource()
                 itemImage.setImageResource(defaultImageResId)
             }
+            itemView.setOnClickListener { onItemClick(item) }
         }
 
         // Function to randomly pick a local image from a predefined set of images

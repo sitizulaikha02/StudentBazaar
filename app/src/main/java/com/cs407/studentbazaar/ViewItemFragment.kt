@@ -1,59 +1,106 @@
 package com.cs407.studentbazaar
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.cs407.studentbazaar.data.PublishedItem
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ViewItemFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ViewItemFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var titleTextView: TextView
+    private lateinit var descriptionTextView: TextView
+    private lateinit var priceTextView: TextView
+    private lateinit var labelTextView: TextView
+    private lateinit var conditionTextView: TextView
+    private lateinit var itemImageView: ImageView
+    private lateinit var addToCartButton: Button
+    private lateinit var messageSellerButton: Button
+    private lateinit var backButton: ImageButton
+    private lateinit var userButton: ImageButton
+    private lateinit var cartViewModel: CartViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_view_item, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_view_item, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ViewItemFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ViewItemFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        // Bind views
+        titleTextView = view.findViewById(R.id.itemTitleView)
+        descriptionTextView = view.findViewById(R.id.itemDescView)
+        priceTextView = view.findViewById(R.id.itemPriceView)
+        labelTextView = view.findViewById(R.id.itemLabelView)
+        conditionTextView = view.findViewById(R.id.itemConditionView)
+        itemImageView = view.findViewById(R.id.itemImageView)
+        addToCartButton = view.findViewById(R.id.addCartButton)
+        messageSellerButton = view.findViewById(R.id.messageSellerButton)
+        backButton = view.findViewById(R.id.button_back)
+        userButton = view.findViewById(R.id.imageUser)
+
+        cartViewModel = ViewModelProvider(requireActivity())[CartViewModel::class.java]
+
+        // Set data from arguments
+        arguments?.let {
+            titleTextView.text = it.getString("title") ?: "No Title"
+            descriptionTextView.text = it.getString("description") ?: "No Description"
+            priceTextView.text = "$${it.getDouble("price", 0.0)}"
+            labelTextView.text = it.getString("label") ?: "No Label"
+            conditionTextView.text = it.getString("condition") ?: "Unknown Condition"
+
+            // Load image using Glide
+            val imageUri = it.getString("imageUri")
+            Glide.with(requireContext())
+                .load(imageUri)
+                .error(R.drawable.default_image) // Placeholder for missing images
+                .into(itemImageView)
+        }
+
+        addToCartButton.setOnClickListener {
+            // Create a PublishedItem object from the data displayed on the screen
+            val item = PublishedItem(
+                title = titleTextView.text.toString(),
+                description = descriptionTextView.text.toString(),
+                price = priceTextView.text.toString()
+                    .removePrefix("$")
+                    .toDoubleOrNull() ?: 0.0, // Convert to double, fallback to 0.0 if invalid
+                label = labelTextView.text.toString(),
+                condition = conditionTextView.text.toString(),
+                imageUri = arguments?.getString("imageUri") ?: ""
+            )
+
+            // Add the item to the cart using ViewModel
+            cartViewModel.addItem(item)
+
+            // Display a message to the user
+            Toast.makeText(requireContext(), "${item.title} added to cart!", Toast.LENGTH_SHORT).show()
+        }
+
+
+        messageSellerButton.setOnClickListener {
+            // Handle messaging the seller
+            Toast.makeText(requireContext(), "Message seller feature coming soon!", Toast.LENGTH_SHORT).show()
+        }
+
+        // Back Button: Navigate to the previous fragment
+        backButton.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack() // Pop the current fragment from the stack
+        }
+
+        // Username Button: Navigate to the user profile
+        userButton.setOnClickListener {
+            findNavController().navigate(R.id.action_viewItemFragment_to_userProfileFragment) // Navigate to the user profile fragment
+        }
+
+        return view
     }
 }

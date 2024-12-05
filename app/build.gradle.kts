@@ -6,6 +6,7 @@ plugins {
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
+
 android {
     namespace = "com.cs407.studentbazaar"
     compileSdk = 34
@@ -64,6 +65,8 @@ dependencies {
     implementation("com.google.api-client:google-api-client:1.33.2")
     implementation("com.squareup.okhttp3:okhttp:4.11.0") // Optional for HTTP calls
 
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation(libs.play.services.wallet)  // Latest Glide version
 
 
     implementation("com.github.bumptech.glide:glide:4.15.1")
