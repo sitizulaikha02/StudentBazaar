@@ -60,74 +60,118 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
-    <!-- TextView 4 -->
+    <!-- Labels and item details -->
 
-    <!-- TextView 5 -->
+    <!-- Title label and value -->
     <TextView
-        android:id="@+id/itemTitleView"
-        android:layout_width="157dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="36dp"
+        android:id="@+id/titleLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title:"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/item_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/itemImageView" />
 
-    <!-- TextView 6 -->
     <TextView
-        android:id="@+id/itemPriceView"
-        android:layout_width="167dp"
-        android:layout_height="46dp"
+        android:id="@+id/itemTitleView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="@string/item_price"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@id/itemTitleView"
-        app:layout_constraintTop_toTopOf="@id/itemTitleView" />
+        android:layout_marginTop="4dp"
+        android:text="@string/item_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleLabel" />
 
-    <!-- TextView 7 -->
-
-    <!-- TextView 8 -->
-
-    <!-- Add to Cart Button -->
-
+    <!-- Price label and value -->
     <TextView
-        android:id="@+id/itemLabelView"
-        android:layout_width="329dp"
-        android:layout_height="37dp"
+        android:id="@+id/priceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price:"
+        android:textStyle="bold"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/item_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.378"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/itemTitleView" />
 
     <TextView
-        android:id="@+id/itemConditionView"
-        android:layout_width="329dp"
-        android:layout_height="38dp"
+        android:id="@+id/itemPriceView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:text="@string/item_condition"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.393"
+        android:text="@string/item_price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/priceLabel" />
+
+    <!-- Label and value for other fields (Label, Condition, Description) -->
+
+    <TextView
+        android:id="@+id/labelLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Label:"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/itemPriceView" />
+
+    <TextView
+        android:id="@+id/itemLabelView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/item_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelLabel" />
+
+    <TextView
+        android:id="@+id/conditionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Condition:"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/itemLabelView" />
 
     <TextView
-        android:id="@+id/itemDescView"
-        android:layout_width="326dp"
-        android:layout_height="136dp"
+        android:id="@+id/itemConditionView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:text="@string/item_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.376"
+        android:text="@string/item_condition"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/conditionLabel" />
+
+    <TextView
+        android:id="@+id/descLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description:"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/itemConditionView" />
 
-    <!-- Message Seller Button -->
+    <TextView
+        android:id="@+id/itemDescView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/item_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descLabel" />
+
+    <!-- Buttons -->
     <Button
         android:id="@+id/addCartButton"
         android:layout_width="0dp"
@@ -157,4 +201,3 @@
         app:layout_constraintTop_toBottomOf="@id/addCartButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
