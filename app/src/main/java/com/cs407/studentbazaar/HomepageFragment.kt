@@ -8,24 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import android.widget.Switch
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import kotlin.getValue
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.widget.SearchView
 import com.cs407.studentbazaar.adapters.PublishedItemAdapter
-import com.cs407.studentbazaar.data.PublishedItem
+import com.cs407.studentbazaar.adapters.PublishedItem
 import com.google.firebase.firestore.FirebaseFirestore
 
 class HomepageFragment : Fragment() {
@@ -43,6 +39,7 @@ class HomepageFragment : Fragment() {
     private lateinit var priceLowSwitch: Switch
     private lateinit var priceHighSwitch: Switch
     private lateinit var cartButton: ImageView
+    private lateinit var inboxButton: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,6 +68,7 @@ class HomepageFragment : Fragment() {
         priceLowSwitch = view.findViewById(R.id.priceLowSwitch)
         priceHighSwitch = view.findViewById(R.id.priceHighSwitch)
         cartButton = view.findViewById(R.id.cartButton)
+        inboxButton = view.findViewById(R.id.inboxButton)
 
         // Fetch and display the items from Firestore
         fetchItems()
@@ -86,6 +84,10 @@ class HomepageFragment : Fragment() {
 
         cartButton.setOnClickListener {
             findNavController().navigate(R.id.action_HomepageFragment_to_cartFragment)
+        }
+
+        inboxButton.setOnClickListener {
+            findNavController().navigate(R.id.action_HomepageFragment_to_inboxFragment)
         }
 
         // Set search and filter listeners

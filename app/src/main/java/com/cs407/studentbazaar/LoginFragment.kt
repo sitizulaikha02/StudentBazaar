@@ -2,6 +2,7 @@ package com.cs407.studentbazaar
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -52,25 +55,46 @@ class LoginFragment : Fragment() {
                     if (task.isSuccessful) {
                         Toast.makeText(requireContext(), "Sign-in successful.", Toast.LENGTH_SHORT).show()
 
-                        // Save both email and userId to sharedpref
+                        // Get the current user
                         FirebaseAuth.getInstance().currentUser?.let { user ->
                             val userId = user.uid
-                            val sharedPref = requireContext().getSharedPreferences("WhoAmI", Context.MODE_PRIVATE)
-                            with(sharedPref.edit()) {
-                                putString("EMAIL", email) // Replace email with the actual email value
-                                putString("USER_ID", userId)
-                                apply()
-                            }
 
+                            // Fetch the username from Firestore
+                            val firestore = FirebaseFirestore.getInstance()
+                            firestore.collection("users").document(userId).get()
+                                .addOnSuccessListener { document ->
+                                    if (document != null && document.exists()) {
+                                        // Assuming the username field in Firestore is "username"
+                                        val username = document.getString("username") ?: "Unknown"
+
+                                        // Save userId and username to SharedPreferences
+                                        val sharedPref = requireContext().getSharedPreferences("WhoAmI", Context.MODE_PRIVATE)
+                                        with(sharedPref.edit()) {
+                                            putString("USER_ID", userId)
+                                            putString("USERNAME", username)
+                                            apply()
+                                        }
+
+                                        // Fetch and save the FCM token
+                                        saveFcmTokenToFirestore(userId)
+
+                                        // Navigate to HomePageFragment
+                                        findNavController().navigate(R.id.action_loginFragment_to_homepageFragment)
+                                    } else {
+                                        Toast.makeText(requireContext(), "User data not found.", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                                .addOnFailureListener {
+                                    Toast.makeText(requireContext(), "Failed to retrieve user data.", Toast.LENGTH_SHORT).show()
+                                }
                         }
-
-                        // Navigate to HomePageFragment after successful login
-                        findNavController().navigate(R.id.action_loginFragment_to_homepageFragment)
                     } else {
                         Toast.makeText(requireContext(), "Authentication failed. Please try again.", Toast.LENGTH_SHORT).show()
                     }
                 }
+
         }
+
 
 
 
@@ -80,6 +104,30 @@ class LoginFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun saveFcmTokenToFirestore(userId: String) {
+        // Fetch the FCM token
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val token = task.result
+                    if (token != null) {
+                        // Save the token to Firestore
+                        val firestore = FirebaseFirestore.getInstance()
+                        firestore.collection("users").document(userId)
+                            .update("fcmToken", token)
+                            .addOnSuccessListener {
+                                Log.d("SavingFCM", "FCM token saved successfully.")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("SavingFCM", "Failed to save FCM token: ${e.message}")
+                            }
+                    }
+                } else {
+                    Log.e("SavingFCM", "Failed to fetch FCM token: ${task.exception?.message}")
+                }
+            }
     }
 
 }

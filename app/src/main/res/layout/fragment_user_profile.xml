@@ -15,7 +15,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,7 +59,8 @@
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@+id/displayName"
                     app:layout_constraintStart_toStartOf="@+id/displayName"
-                    app:layout_constraintTop_toBottomOf="@+id/displayName" />
+                    app:layout_constraintTop_toBottomOf="@+id/displayName"
+                    app:layout_constraintBottom_toTopOf="@id/bio"/>
 
                 <TextView
                     android:id="@+id/bio"
@@ -79,7 +81,6 @@
                     android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:text="@string/edit_profile_button"
-                    app:layout_constraintBottom_toTopOf="@id/linearLayout2"
                     app:layout_constraintEnd_toEndOf="@id/bio"
                     app:layout_constraintHorizontal_bias="0.512"
                     app:layout_constraintStart_toStartOf="@id/bio"
@@ -91,15 +92,43 @@
                     android:layout_width="143dp"
                     android:layout_height="48dp"
                     android:layout_margin="8dp"
-                    android:visibility="gone"
                     android:text="@string/follow"
-                    app:layout_constraintBottom_toTopOf="@id/linearLayout2"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@id/bio"
                     app:layout_constraintHorizontal_bias="0.512"
                     app:layout_constraintStart_toStartOf="@id/bio"
                     app:layout_constraintTop_toBottomOf="@id/bio" />
 
-                <LinearLayout
+                <Button
+                    android:id="@+id/logoutButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="-50dp"
+                    android:layout_marginBottom="265dp"
+                    android:backgroundTint="@color/grey"
+                    android:text="@string/logout"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/profile_picture"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/notificationButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_notifications"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    tools:layout_editor_absoluteX="21dp"
+                    tools:layout_editor_absoluteY="24dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <LinearLayout
                     android:id="@+id/linearLayout2"
                     android:layout_width="375dp"
                     android:layout_height="wrap_content"
@@ -181,34 +210,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent" />
-
-                <Button
-                    android:id="@+id/logoutButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="-50dp"
-                    android:layout_marginBottom="265dp"
-                    android:backgroundTint="@color/grey"
-                    android:text="@string/logout"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/profile_picture"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/notificationButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_notifications"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginStart="16dp"
-                    tools:layout_editor_absoluteX="21dp"
-                    tools:layout_editor_absoluteY="24dp" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </ScrollView>

@@ -11,8 +11,8 @@ import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.cs407.studentbazaar.data.NotificationItem
-import com.cs407.studentbazaar.data.NotificationItemAdapter
+import com.cs407.studentbazaar.adapters.NotificationItem
+import com.cs407.studentbazaar.adapters.NotificationItemAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -113,7 +113,8 @@ class NotificationFragment : Fragment() {
             editTextSender.text.toString(),
             activity
         )
-        NotificationHelper.getInstance().showNotification(requireContext())
+        NotificationHelper.getInstance().showNotification(requireContext(), userUid.toString(), "message")
+        Log.d("Notification", "Notification displayed successfully")
         addNotificationToFirestore()
     }
 

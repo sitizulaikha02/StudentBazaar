@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,62 +9,66 @@
     <!-- Title bar with back button, title, and profile icon -->
     <LinearLayout
         android:id="@+id/title_bar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="8dp"
         android:background="?attr/colorPrimary"
-        android:gravity="center_vertical"
-        android:layout_gravity="top">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Back button -->
         <ImageButton
             android:id="@+id/button_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_back"
-        android:contentDescription="Back"
-        android:padding="8dp" />
+            android:contentDescription="Back"
+            android:padding="8dp"
+            android:src="@drawable/ic_back" />
 
         <!-- Title in the middle -->
+
+        <!-- Profile button -->
         <TextView
             android:id="@+id/chat_title"
-            android:layout_width="285dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginTop="7dp"
             android:gravity="center"
             android:text="@string/chat_title"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
-        <!-- Add this inside your existing layout -->
-
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/userButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:src="@drawable/default_profile_picture" />
-
     </LinearLayout>
 
-    <!-- RecyclerView to display chat messages, positioned below the title bar -->
+    <!-- RecyclerView to display chat messages -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_chat"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="56dp"
-    android:layout_marginBottom="64dp"
-    android:scrollbars="vertical" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/title_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/layout_message_input"
+        android:scrollbars="vertical" />
 
     <!-- Chat input and send button container positioned at the bottom -->
     <LinearLayout
         android:id="@+id/layout_message_input"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="8dp"
-        android:layout_gravity="bottom">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Text input for typing messages -->
         <com.google.android.material.textfield.TextInputLayout
@@ -86,15 +90,13 @@
             android:id="@+id/button_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send"
-            android:layout_gravity="center_vertical" />
+            android:text="Send" />
 
         <Button
             android:id="@+id/button_meetup"
-            android:layout_width="70dp"
-            android:layout_height="63dp"
-            android:layout_gravity="center_horizontal"
-            android:text="Set Meetup Location" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Meetup" />
     </LinearLayout>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

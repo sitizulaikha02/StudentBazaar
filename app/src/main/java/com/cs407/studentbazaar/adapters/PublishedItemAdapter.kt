@@ -1,6 +1,5 @@
 package com.cs407.studentbazaar.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.cs407.studentbazaar.R
-import com.cs407.studentbazaar.data.PublishedItem
 
 class PublishedItemAdapter(private val items: List<PublishedItem>) : RecyclerView.Adapter<PublishedItemAdapter.PublishedItemViewHolder>() {
 

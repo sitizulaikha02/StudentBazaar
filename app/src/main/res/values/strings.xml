@@ -51,6 +51,7 @@
     <string name="listing_count">%s</string>
     <string name="followers_count">%s</string>
     <string name="following_count">%s</string>
+    <string name="following">Following</string>
     // Notification
     <string name="notifications">Notifications</string>
     <string name="send_notification">Send Notification</string>
@@ -62,6 +63,12 @@
     <string name="hide_on_lockscreen">Hide content when locked</string>
     <string name="reply">Reply</string>
     <string name="replied">Replied: %1$s (to message %2$d)</string>
+    <string name="following_notify">%1$s started following you.</string>
+    <string name="new_follower">New follower</string>
+    // Chat
+    <string name="inbox">Inbox</string>
+    <string name="sent_message">This is sent message</string>
+    <string name="received_message">This is received message</string>
     <!-- Placeholder texts -->
     <string name="click">Click here</string>
     <string name="follow">Follow</string>
@@ -70,4 +77,6 @@
     <string name="item_view_title">View Item</string>
     <string name="add_cart_button">Add to Cart</string>
     <string name="message_seller_button">Message Seller</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

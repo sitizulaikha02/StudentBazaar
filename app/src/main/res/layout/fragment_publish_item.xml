@@ -31,7 +31,7 @@
 
         <!-- Title in the middle -->
         <TextView
-            android:id="@+id/publish_title"
+            android:id="@+id/notifications_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

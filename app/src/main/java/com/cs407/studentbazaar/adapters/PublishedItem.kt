@@ -1,4 +1,4 @@
-package com.cs407.studentbazaar.data
+package com.cs407.studentbazaar.adapters
 
 data class PublishedItem(
     val title: String = "",

@@ -9,6 +9,9 @@ plugins {
 
 buildscript {
     dependencies {
+        classpath("com.android.tools.build:gradle:3.2.1")
+        classpath("com.google.gms:google-services:4.4.0")
         classpath("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1")
     }
 }
+

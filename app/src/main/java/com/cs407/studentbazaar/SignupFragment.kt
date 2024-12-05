@@ -80,8 +80,8 @@ class SignupFragment : Fragment() {
                         val userId = user.uid
                         val sharedPref = requireContext().getSharedPreferences("WhoAmI", Context.MODE_PRIVATE)
                         with(sharedPref.edit()) {
-                            putString("EMAIL", email) // Replace email with the actual email value
                             putString("USER_ID", userId)
+                            putString("USERNAME", username)
                             apply()
                         }
 

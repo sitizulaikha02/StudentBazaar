@@ -77,6 +77,7 @@
         app:layout_constraintEnd_toStartOf="@+id/chatButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/accountButton"
+        app:layout_constraintTop_toBottomOf="@id/checkoutButton"
         app:layout_constraintTop_toTopOf="@+id/accountButton" />
 
     <Button
@@ -84,10 +85,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/account_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/homeButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="676dp" />
+        app:layout_constraintTop_toBottomOf="@id/checkoutButton" />
 
     <Button
         android:id="@+id/chatButton"

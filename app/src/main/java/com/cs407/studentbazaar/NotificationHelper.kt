@@ -9,6 +9,7 @@ import android.app.Notification
 import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -91,13 +92,29 @@ class NotificationHelper private constructor() {
      * @param context The context in which the function is called, typically an Activity or
      *                  Application context.
      */
-    fun showNotification(context: Context) {
+    fun showNotification(context: Context, senderUid: String, notificationType: String) {
         // Ensure that the app has the required POST_NOTIFICATIONS permission before proceeding.
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
             != PackageManager.PERMISSION_GRANTED) {
             // If permission is not granted, exit the function without showing the notification
             return
         }
+
+        // Create an Intent to open MainActivity with the messageId
+        val intent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            putExtra("name", sender) // Example: Include sender's name
+            putExtra("senderUid", senderUid) // Include sender's UID
+            putExtra("notificationType", notificationType) // Include notification type
+        }
+
+        // Create a PendingIntent for the notification click
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            notificationId, // Use the unique notificationId
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
         // Set up a NotificationCompat.Builder instance to create and customize the notification.
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
@@ -109,6 +126,9 @@ class NotificationHelper private constructor() {
             .setContentText(message)
             // Set the notification priority; PRIORITY_DEFAULT keeps the notification non-intrusive.
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true) // Auto-dismiss on click
+            .setContentIntent(pendingIntent) // Attach the PendingIntent
+
 
         // Get a NotificationManagerCompat instance to issue the notification
         val notificationManager = NotificationManagerCompat.from(context)

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
     id("com.google.devtools.ksp")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -34,6 +35,13 @@ android {
         }
     }
 
+    // Add this block to handle duplicate META-INF files
+    packaging {
+        resources {
+            excludes += "META-INF/DEPENDENCIES"
+        }
+    }
+
     buildFeatures {
         buildConfig = true // Enable BuildConfig fields
     }
@@ -51,9 +59,15 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-messaging:24.1.0")
+    implementation("com.google.auth:google-auth-library-oauth2-http:1.16.0")
+    implementation("com.google.api-client:google-api-client:1.33.2")
+    implementation("com.squareup.okhttp3:okhttp:4.11.0") // Optional for HTTP calls
 
 
-    implementation("com.github.bumptech.glide:glide:4.15.1")  // Latest Glide version
+
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation(libs.firebase.database)  // Latest Glide version
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1") // For annotation processing
 
     implementation(libs.androidx.core.ktx)

@@ -1,6 +1,5 @@
-package com.cs407.studentbazaar.data
+package com.cs407.studentbazaar.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

@@ -49,12 +49,21 @@
         <action
             android:id="@+id/action_homepageFragment_to_publishItemFragment"
             app:destination="@id/publishItemFragment" />
+        <action
+            android:id="@+id/action_HomepageFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_HomepageFragment_to_inboxFragment"
+            app:destination="@id/inboxFragment" />
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.cs407.studentbazaar.UserProfileFragment"
         android:label="fragment_user_profile"
         tools:layout="@layout/fragment_user_profile" >
+        <argument
+            android:name="receiverUid"
+            app:argType="string"/>
         <action
             android:id="@+id/action_userProfileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
@@ -99,13 +108,39 @@
         android:name="com.cs407.studentbazaar.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" >
+        <argument
+            android:name="messageId"
+            app:argType="string" />
         <action
             android:id="@+id/action_chatFragment_to_meetupFragment"
             app:destination="@id/meetupFragment" />
+        <action
+            android:id="@+id/action_chatFragment_to_inboxFragment"
+            app:destination="@id/inboxFragment" />
+        <action
+            android:id="@+id/action_chatFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/meetupFragment"
         android:name="com.cs407.studentbazaar.MeetupFragment"
         android:label="fragment_meetup"
         tools:layout="@layout/fragment_map_meetup" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.cs407.studentbazaar.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/inboxFragment"
+        android:name="com.cs407.studentbazaar.InboxFragment"
+        android:label="fragment_inbox"
+        tools:layout="@layout/fragment_inbox" >
+        <action
+            android:id="@+id/action_inboxFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_inboxFragment_to_HomepageFragment"
+            app:destination="@id/HomepageFragment" />
+    </fragment>
 </navigation>
