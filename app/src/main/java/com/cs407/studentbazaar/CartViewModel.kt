@@ -3,7 +3,7 @@ package com.cs407.studentbazaar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.cs407.studentbazaar.data.PublishedItem // <-- Add this line
+import com.cs407.studentbazaar.adapters.PublishedItem // <-- Add this line
 
 class CartViewModel : ViewModel() {
     // LiveData for storing cart items

@@ -19,15 +19,13 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Back button -->
-        <ImageButton
+        <ImageView
             android:id="@+id/button_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="Back"
             android:padding="8dp"
             android:src="@drawable/ic_back" />
-
-        <!-- Title in the middle -->
 
         <!-- Profile button -->
         <TextView
@@ -41,10 +39,12 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/userButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="center"
             android:src="@drawable/default_profile_picture" />
     </LinearLayout>
 

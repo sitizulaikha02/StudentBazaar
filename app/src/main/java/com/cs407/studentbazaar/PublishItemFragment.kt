@@ -34,8 +34,7 @@ class PublishItemFragment : Fragment() {
 
     private val PICK_IMAGE_REQUEST = 71
 
-    private lateinit var backButton: ImageButton
-    private lateinit var profileButton: ImageButton
+    private lateinit var backButton: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,16 +51,11 @@ class PublishItemFragment : Fragment() {
         listItemButton = view.findViewById(R.id.listItemButton)
 
         backButton = view.findViewById(R.id.button_back)
-        profileButton = view.findViewById(R.id.imageButton2)
 
         listItemButton.setOnClickListener { publishItem() }
 
         backButton.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
-        }
-
-        profileButton.setOnClickListener {
-            findNavController().navigate(R.id.action_publishItemFragment_to_userProfileFragment)
         }
 
         itemImage.setOnClickListener {

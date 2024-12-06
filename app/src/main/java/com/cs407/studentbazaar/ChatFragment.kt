@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -30,13 +31,12 @@ class ChatFragment : Fragment() {
     private lateinit var chatRecyclerView: RecyclerView
     private lateinit var messageBox: EditText
     private lateinit var sendButton: Button
-    private lateinit var backButton: ImageButton
-    private lateinit var userButton: ImageButton
+    private lateinit var backButton: ImageView
+    private lateinit var userButton: ImageView
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var messageList: ArrayList<Message>
     private lateinit var db: DatabaseReference
     private lateinit var chatTitleBar: TextView
-    private lateinit var messageId: String
 
     private var receiverRoom: String? = null
     private var senderRoom: String? = null
@@ -67,10 +67,10 @@ class ChatFragment : Fragment() {
         senderRoom = receiverUid + senderUid
         receiverRoom = senderUid + receiverUid
 
-        Log.d("senderUid", "$senderUid")
-        Log.d("receiverUid", "$receiverUid")
-        Log.d("senderRoom", "$senderRoom")
-        Log.d("receiverRoom", "$receiverRoom")
+//        Log.d("senderUid", "$senderUid")
+//        Log.d("receiverUid", "$receiverUid")
+//        Log.d("senderRoom", "$senderRoom")
+//        Log.d("receiverRoom", "$receiverRoom")
 
         loadChatMessages()
 
@@ -95,7 +95,7 @@ class ChatFragment : Fragment() {
                     for (postSnapshot in snapshot.children) {
                         val message = postSnapshot.getValue(Message::class.java)
                         message?.let { messageList.add(it) }
-                        Log.d("onDataChange", "Message added: ${message?.message}, Sender: ${message?.senderId}")
+                        // Log.d("onDataChange", "Message added: ${message?.message}, Sender: ${message?.senderId}")
                     }
                     messageAdapter.notifyDataSetChanged()
 

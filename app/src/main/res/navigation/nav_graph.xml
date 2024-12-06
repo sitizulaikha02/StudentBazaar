@@ -53,9 +53,6 @@
             android:id="@+id/action_homepageFragment_to_publishItemFragment"
             app:destination="@id/publishItemFragment" />
         <action
-            android:id="@+id/action_HomepageFragment_to_cartFragment"
-            app:destination="@id/cartFragment" />
-        <action
             android:id="@+id/action_HomepageFragment_to_inboxFragment"
             app:destination="@id/inboxFragment" />
         <action
@@ -93,6 +90,12 @@
         <action
             android:id="@+id/action_userProfileFragment_to_notificationFragment"
             app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_HomepageFragment"
+            app:destination="@id/HomepageFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_inboxFragment"
+            app:destination="@id/inboxFragment" />
     </fragment>
 
     <fragment
@@ -162,11 +165,6 @@
             android:id="@+id/action_cartFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/cartFragment"
-        android:name="com.cs407.studentbazaar.CartFragment"
-        android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/inboxFragment"
         android:name="com.cs407.studentbazaar.InboxFragment"

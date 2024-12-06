@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.marginStart
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -29,10 +30,10 @@ import kotlin.toString
 class UserProfileFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var itemList: ArrayList<UserItem>
-    private lateinit var itemAdapter: UserItemAdapter
     private lateinit var editProfileButton: Button
     private lateinit var followButton: Button
-    private lateinit var logoutButton: Button
+    private lateinit var logoutButton: ImageView
+    private lateinit var backButton: ImageView
     private lateinit var nameTextView: TextView // TextView for displaying the name
     private lateinit var usernameTextView: TextView // TextView for displaying the username
     private lateinit var bioTextView: TextView // TextView for displaying the bio
@@ -40,6 +41,8 @@ class UserProfileFragment : Fragment() {
     private lateinit var followersTextView: TextView
     private lateinit var followingTextView: TextView
     private lateinit var notificationButton: ImageView
+    private var currentUserUid: String? = null
+    private var receiverUid: String? = null
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
@@ -73,34 +76,28 @@ class UserProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_userProfileFragment_to_loginFragment)
         }
 
-        // Initialize the button
-        notificationButton = view.findViewById(R.id.notificationButton)
+        Log.d("UserProfileNavigate", "current: $currentUserUid, receiver: $receiverUid")
+
+        // Set click listener to open EditProfileFragment
+        // KIV
+        backButton.setOnClickListener {
+
+            if (currentUserUid != receiverUid) {
+                findNavController().navigate(R.id.action_userProfileFragment_to_HomepageFragment)
+            } else {
+                findNavController().navigate(R.id.action_userProfileFragment_to_inboxFragment)
+            }
+        }
+
         // Set OnClickListener on the button
         notificationButton.setOnClickListener {
             // Use Navigation Component to navigate to UserProfileFragment
             findNavController().navigate(R.id.action_userProfileFragment_to_notificationFragment)
         }
 
-        // Enable edge-to-edge display
-        ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
         return view
 
     }
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        setHasOptionsMenu(true)
-//        super.onCreate(savedInstanceState)
-//    }
-//
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater?) {
-//        inflater!!.inflate(R.menu.user_menu, menu)
-//    }
-
 
     private fun init(view: View) {
         recyclerView = view.findViewById(R.id.recyclerView)
@@ -117,6 +114,8 @@ class UserProfileFragment : Fragment() {
         editProfileButton = view.findViewById(R.id.editProfileButton)
         followButton = view.findViewById(R.id.followButton)
         logoutButton = view.findViewById(R.id.logoutButton)
+        backButton = view.findViewById(R.id.button_back)
+        notificationButton = view.findViewById(R.id.notificationButton)
 
         listingTextView = view.findViewById(R.id.listingCount)
         followersTextView = view.findViewById(R.id.followersCount)
@@ -139,10 +138,10 @@ class UserProfileFragment : Fragment() {
 
     private fun loadProfileData() {
         // Retrieve the receiverUid from arguments
-        val receiverUid = arguments?.getString("uid")
+        receiverUid = arguments?.getString("uid")
 
         // Get the current user's UID
-        val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+        currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
 
         // Check if visiting own profile or another user's profile
         if (receiverUid == null || receiverUid == currentUserUid) {
@@ -152,14 +151,20 @@ class UserProfileFragment : Fragment() {
             logoutButton.visibility = View.VISIBLE
         } else {
             // Visiting another user's profile
+            val marginInDp = -45 // Replace with desired margin in dp
+            val marginInPx = (marginInDp * resources.displayMetrics.density).toInt()
+
+            val layoutParams = nameTextView.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.marginStart = marginInPx
+
+            nameTextView.layoutParams = layoutParams
+
             editProfileButton.visibility = View.GONE
+            notificationButton.visibility = View.GONE
             followButton.visibility = View.VISIBLE
             logoutButton.visibility = View.GONE
 
-            observeFollowState(receiverUid) // Start observing follow state dynamically
-
-            // Update the follow button state dynamically (e.g., check if already following)
-            updateFollowButtonState(receiverUid)
+            observeFollowState(receiverUid) // Start observing and handling follow state dynamically
         }
 
         // Firestore instance
@@ -198,37 +203,35 @@ class UserProfileFragment : Fragment() {
         fetchItems(receiverUid ?: currentUserUid!!)
     }
 
-    private fun updateFollowButtonState(receiverUid: String) {
+    // FOLLOWING USER KIV
+    private fun observeFollowState(receiverUid: String?) {
         val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val db = FirebaseFirestore.getInstance()
 
-        // Check if the current user is following the receiver
-        db.collection("users").document(currentUserUid).collection("following").document(receiverUid)
-            .get()
-            .addOnSuccessListener { documentSnapshot ->
-                if (documentSnapshot.exists()) {
-                    // Already following
-                    Log.d("FollowState", "User is already following: $receiverUid")
-                    followButton.text = getString(R.string.following)
-                    followButton.setOnClickListener {
-                        // Unfollow logic
-                        Log.d("FollowState", "Unfollow button clicked for: $receiverUid")
-                        unfollowUser(receiverUid)
-                    }
-                } else {
-                    // Not following
-                    Log.d("FollowState", "User is not following: $receiverUid")
-                    followButton.text = getString(R.string.follow)
-                    followButton.setOnClickListener {
-                        // Follow logic
-                        Log.d("FollowState", "Follow button clicked for: $receiverUid")
-                        followUser(receiverUid)
-                    }
-                }
-            }
-            .addOnFailureListener { e ->
-                Log.e("FollowState", "Error checking follow state: ${e.message}")
-            }
+//        // Listen for changes in the "following" collection
+//        db.collection("users").document(currentUserUid).collection("following").document(receiverUid)
+//            .addSnapshotListener { documentSnapshot, error ->
+//                if (error != null) {
+//                    Log.e("FollowState", "Error observing follow state: ${error.message}")
+//                    return@addSnapshotListener
+//                }
+//
+//                if (documentSnapshot != null && documentSnapshot.exists()) {
+//                    // User is already following
+//                    Log.d("FollowState", "User is following: $receiverUid")
+//                    followButton.text = getString(R.string.following)
+//                    followButton.setOnClickListener {
+//                        unfollowUser(receiverUid) // Trigger unfollow action
+//                    }
+//                } else {
+//                    // User is not following
+//                    Log.d("FollowState", "User is not following: $receiverUid")
+//                    followButton.text = getString(R.string.follow)
+//                    followButton.setOnClickListener {
+//                        followUser(receiverUid) // Trigger follow action
+//                    }
+//                }
+//            }
     }
 
     private fun followUser(receiverUid: String) {
@@ -301,71 +304,8 @@ class UserProfileFragment : Fragment() {
             .delete()
     }
 
-    private fun observeFollowState(receiverUid: String) {
-        val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        val db = FirebaseFirestore.getInstance()
-
-        // Listen for changes in the "following" collection
-        db.collection("users").document(currentUserUid).collection("following").document(receiverUid)
-            .addSnapshotListener { documentSnapshot, error ->
-                if (error != null) {
-                    Log.e("FollowState", "Error observing follow state: ${error.message}")
-                    return@addSnapshotListener
-                }
-
-                if (documentSnapshot != null && documentSnapshot.exists()) {
-                    // User is already following
-                    Log.d("FollowState", "User is following: $receiverUid")
-                    followButton.text = getString(R.string.following)
-                    followButton.setOnClickListener {
-                        unfollowUser(receiverUid) // Trigger unfollow action
-                    }
-                } else {
-                    // User is not following
-                    Log.d("FollowState", "User is not following: $receiverUid")
-                    followButton.text = getString(R.string.follow)
-                    followButton.setOnClickListener {
-                        followUser(receiverUid) // Trigger follow action
-                    }
-                }
-            }
-    }
-//        // ========================================
-//        // Retrieve the email from sharedPreferences
-//        val sharedPref = requireContext().getSharedPreferences("WhoAmI", Context.MODE_PRIVATE)
-//        val email = sharedPref.getString("EMAIL", null)
-//
-//        email?.let { currentUserEmail ->
-//            // Launch a coroutine to load the user data from the database
-//            lifecycleScope.launch {
-//                val userData = getUserFromDatabase(currentUserEmail)
-//                userData.let {
-//                    // Update the TextViews with the retrieved values
-//                    nameTextView.text = it.name
-//                    usernameTextView.text = getString(R.string.username_format, it.username)
-//                    bioTextView.text = it.bio
-//                }
-//            }
-//        }
-
-
-//    private suspend fun getUserFromDatabase(userEmail: String): User {
-//        return withContext(Dispatchers.IO) {
-//            database.userDao().getByEmail(userEmail)
-//        }
-//    }
 
     private fun fetchItems(userId: String) {
-
-        // Get the userId from SharedPreferences
-//        val sharedPref = requireContext().getSharedPreferences("WhoAmI", Context.MODE_PRIVATE)
-//        val userId = sharedPref.getString("USER_ID", null)
-
-//        if (userId.isNullOrEmpty()) {
-//            Toast.makeText(requireContext(), "User ID not found!", Toast.LENGTH_SHORT).show()
-//            return
-//        }
-
         // Query Firestore to get items uploaded by this user
         val firestore = FirebaseFirestore.getInstance()
         firestore.collection("items")
@@ -384,7 +324,7 @@ class UserProfileFragment : Fragment() {
                 }
 
                 // Use the list of imageUris as needed
-                Log.d("ImageUris", "Fetched image URIs: $imageUris")
+                // Log.d("ImageUris", "Fetched image URIs: $imageUris")
 
                 // Example: Pass the imageUris to an adapter
                 val itemAdapter = UserItemAdapter(imageUris)
@@ -392,12 +332,16 @@ class UserProfileFragment : Fragment() {
 
             }
             .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Failed to load user items: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Failed to load user items: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
                 Log.e("FetchUserItems", "Error fetching user items", e)
             }
 
-
     }
+
 
 }
 

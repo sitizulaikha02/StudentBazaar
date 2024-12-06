@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- Back button -->
-        <ImageButton
+        <ImageView
             android:id="@+id/button_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,23 +32,15 @@
         <!-- Title in the middle -->
         <TextView
             android:id="@+id/cart_title"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginEnd="35dp"
             android:text="@string/cart_title"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@id/imageButton2"
             app:layout_constraintStart_toEndOf="@id/button_back" />
 
-        <!-- Profile icon on the right -->
-        <ImageButton
-            android:id="@+id/imageUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="Profile"
-            android:src="@drawable/default_profile_picture"
-            app:layout_constraintEnd_toEndOf="parent" />
     </LinearLayout>
 
     <!-- RecyclerView for cart items -->

@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cs407.studentbazaar.R
-import com.cs407.studentbazaar.data.PublishedItem
+import com.cs407.studentbazaar.adapters.PublishedItem
 
 class CartAdapter(
     private var itemList: List<PublishedItem> = emptyList(),

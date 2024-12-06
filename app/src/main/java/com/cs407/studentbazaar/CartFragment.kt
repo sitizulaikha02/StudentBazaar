@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cs407.studentbazaar.R
 import com.cs407.studentbazaar.CartViewModel
-import com.cs407.studentbazaar.data.PublishedItem
+import com.cs407.studentbazaar.adapters.PublishedItem
 import androidx.navigation.fragment.findNavController
 
 class CartFragment : Fragment() {
@@ -21,8 +22,7 @@ class CartFragment : Fragment() {
     private lateinit var cartViewModel: CartViewModel
     private lateinit var cartRecyclerView: RecyclerView
     private lateinit var checkoutButton: Button
-    private lateinit var backButton: ImageButton
-    private lateinit var userButton: ImageButton
+    private lateinit var backButton: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +38,6 @@ class CartFragment : Fragment() {
         cartRecyclerView = view.findViewById(R.id.recyclerView3)
         checkoutButton = view.findViewById(R.id.checkoutButton)
         backButton = view.findViewById(R.id.button_back)
-        userButton = view.findViewById(R.id.imageUser)
 
         // Set up RecyclerView
         cartRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -77,10 +76,6 @@ class CartFragment : Fragment() {
             findNavController().navigate(R.id.action_cartFragment_to_homeFragment) // Replace with your homepage fragment
         }
 
-        // User Button: Navigate to the user profile
-        userButton.setOnClickListener {
-            findNavController().navigate(R.id.action_cartFragment_to_userProfileFragment) // Navigate to the user profile fragment
-        }
 
         return view
     }

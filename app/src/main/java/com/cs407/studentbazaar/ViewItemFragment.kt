@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.cs407.studentbazaar.data.PublishedItem
+import com.cs407.studentbazaar.adapters.PublishedItem
 
 class ViewItemFragment : Fragment() {
 
@@ -25,8 +25,7 @@ class ViewItemFragment : Fragment() {
     private lateinit var itemImageView: ImageView
     private lateinit var addToCartButton: Button
     private lateinit var messageSellerButton: Button
-    private lateinit var backButton: ImageButton
-    private lateinit var userButton: ImageButton
+    private lateinit var backButton: ImageView
     private lateinit var cartViewModel: CartViewModel
 
     override fun onCreateView(
@@ -45,7 +44,6 @@ class ViewItemFragment : Fragment() {
         addToCartButton = view.findViewById(R.id.addCartButton)
         messageSellerButton = view.findViewById(R.id.messageSellerButton)
         backButton = view.findViewById(R.id.button_back)
-        userButton = view.findViewById(R.id.imageUser)
 
         cartViewModel = ViewModelProvider(requireActivity())[CartViewModel::class.java]
 
@@ -94,11 +92,6 @@ class ViewItemFragment : Fragment() {
         // Back Button: Navigate to the previous fragment
         backButton.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack() // Pop the current fragment from the stack
-        }
-
-        // Username Button: Navigate to the user profile
-        userButton.setOnClickListener {
-            findNavController().navigate(R.id.action_viewItemFragment_to_userProfileFragment) // Navigate to the user profile fragment
         }
 
         return view

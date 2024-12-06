@@ -146,7 +146,7 @@ class HomepageFragment : Fragment() {
                 for (document in querySnapshot.documents) {
                     val item = document.toObject(PublishedItem::class.java)
                     if (item != null) {
-                        Log.d("FetchItems", "Fetched item: ${item.title}, imageUri: ${item.imageUri}")
+                        // Log.d("FetchItems", "Fetched item: ${item.title}, imageUri: ${item.imageUri}")
                         items.add(item)
                     }
                 }

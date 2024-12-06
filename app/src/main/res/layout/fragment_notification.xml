@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- Back button -->
-        <ImageButton
+        <ImageView
             android:id="@+id/button_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,17 +37,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:layout_marginEnd="25dp"
             android:text="@string/notifications"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
-
-        <!-- Profile icon on the right -->
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="Profile"
-            android:src="@drawable/default_profile_picture" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

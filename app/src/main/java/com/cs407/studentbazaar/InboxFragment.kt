@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
@@ -21,7 +22,7 @@ class InboxFragment : Fragment() {
     private lateinit var userRecyclerView: RecyclerView
     private lateinit var userList: ArrayList<User>
     private lateinit var adapter: UserAdapter
-    private lateinit var backButton: ImageButton
+    private lateinit var backButton: ImageView
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class NotificationFragment : Fragment() {
 
-    private lateinit var backButton: ImageButton
+    private lateinit var backButton: ImageView
     private lateinit var notifications: ArrayList<NotificationItem>
     private lateinit var activity: String
     private lateinit var editTextSender: EditText
