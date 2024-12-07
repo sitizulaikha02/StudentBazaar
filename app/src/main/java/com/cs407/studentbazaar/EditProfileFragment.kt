@@ -53,7 +53,6 @@ class EditProfileFragment : Fragment() {
 
         // Set click listener for the back button
         backButton.setOnClickListener {
-            // Use the activity's onBackPressedDispatcher to navigate back
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 

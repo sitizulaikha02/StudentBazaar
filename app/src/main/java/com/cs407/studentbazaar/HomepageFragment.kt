@@ -65,6 +65,7 @@ class HomepageFragment : Fragment() {
                 putDouble("price", selectedItem.price)
                 putString("label", selectedItem.label)
                 putString("condition", selectedItem.condition)
+                putString("userId", selectedItem.userId)
             }
             findNavController().navigate(R.id.action_homepageFragment_to_viewItemFragment, bundle)
         }
@@ -136,7 +137,6 @@ class HomepageFragment : Fragment() {
             requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
         }
     }
-
 
     private fun fetchItems() {
         firestore.collection("items")

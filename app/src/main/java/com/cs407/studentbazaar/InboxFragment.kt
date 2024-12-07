@@ -47,8 +47,7 @@ class InboxFragment : Fragment() {
         fetchUsersFromFirestore()
 
         backButton.setOnClickListener {
-            // Use Navigation Component to navigate to UserProfileFragment
-            findNavController().navigate(R.id.action_inboxFragment_to_HomepageFragment)
+            requireActivity().supportFragmentManager.popBackStack()
         }
 
         return view

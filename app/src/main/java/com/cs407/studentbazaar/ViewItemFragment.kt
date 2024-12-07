@@ -1,6 +1,7 @@
 package com.cs407.studentbazaar
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.cs407.studentbazaar.adapters.PublishedItem
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ViewItemFragment : Fragment() {
 
@@ -27,6 +29,7 @@ class ViewItemFragment : Fragment() {
     private lateinit var messageSellerButton: Button
     private lateinit var backButton: ImageView
     private lateinit var cartViewModel: CartViewModel
+    private lateinit var userId: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,7 +76,8 @@ class ViewItemFragment : Fragment() {
                     .toDoubleOrNull() ?: 0.0, // Convert to double, fallback to 0.0 if invalid
                 label = labelTextView.text.toString(),
                 condition = conditionTextView.text.toString(),
-                imageUri = arguments?.getString("imageUri") ?: ""
+                imageUri = arguments?.getString("imageUri") ?: "",
+                userId = arguments?.getString("userId") ?: ""
             )
 
             // Add the item to the cart using ViewModel
@@ -85,8 +89,35 @@ class ViewItemFragment : Fragment() {
 
 
         messageSellerButton.setOnClickListener {
-            // Handle messaging the seller
-            Toast.makeText(requireContext(), "Message seller feature coming soon!", Toast.LENGTH_SHORT).show()
+            val db = FirebaseFirestore.getInstance()
+
+            val userId = arguments?.getString("userId") ?: ""
+
+            val userRef = db.collection("users").document(userId)
+
+            userRef.get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val name = document.getString("name")
+                        if (name != null) {
+                            val bundle = Bundle().apply {
+                                putString("name", name)
+                                putString("uid", userId)
+                            }
+                            findNavController().navigate(R.id.action_viewItemFragment_to_chatFragment, bundle)
+                        } else {
+                            // Handle the case where 'name' doesn't exist in the document
+                            Log.e("Firestore", "Name field is missing in the document.")
+                        }
+                    } else {
+                        // Handle the case where the document doesn't exist
+                        Log.e("Firestore", "Document not found for userId: $userId")
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    // Handle Firestore fetch error
+                    Log.e("Firestore", "Error fetching user data: ", exception)
+                }
         }
 
         // Back Button: Navigate to the previous fragment

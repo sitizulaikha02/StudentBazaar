@@ -78,15 +78,8 @@ class UserProfileFragment : Fragment() {
 
         Log.d("UserProfileNavigate", "current: $currentUserUid, receiver: $receiverUid")
 
-        // Set click listener to open EditProfileFragment
-        // KIV
         backButton.setOnClickListener {
-
-            if (currentUserUid != receiverUid) {
-                findNavController().navigate(R.id.action_userProfileFragment_to_HomepageFragment)
-            } else {
-                findNavController().navigate(R.id.action_userProfileFragment_to_inboxFragment)
-            }
+            requireActivity().supportFragmentManager.popBackStack() // Pop the current fragment from the stack
         }
 
         // Set OnClickListener on the button

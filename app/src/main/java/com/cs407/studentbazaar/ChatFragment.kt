@@ -172,8 +172,7 @@ class ChatFragment : Fragment() {
         }
 
         backButton.setOnClickListener {
-            // Use Navigation Component to navigate to UserProfileFragment
-            findNavController().navigate(R.id.action_chatFragment_to_inboxFragment)
+            requireActivity().supportFragmentManager.popBackStack()
         }
 
         userButton.setOnClickListener {
