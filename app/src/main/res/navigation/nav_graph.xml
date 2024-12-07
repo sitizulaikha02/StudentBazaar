@@ -148,13 +148,23 @@
         <action
             android:id="@+id/action_chatFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
+
+        <action
+            android:id="@+id/action_chatFragment_to_homepageFragment"
+            app:destination="@id/HomepageFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/meetupFragment"
         android:name="com.cs407.studentbazaar.MeetupFragment"
         android:label="fragment_meetup"
-        tools:layout="@layout/fragment_map_meetup" />
+        tools:layout="@layout/fragment_map_meetup">
+
+    <action
+        android:id="@+id/action_meetupFragment_to_chatFragment"
+        app:destination="@id/chatFragment" />
+
+    </fragment>
 
 
 

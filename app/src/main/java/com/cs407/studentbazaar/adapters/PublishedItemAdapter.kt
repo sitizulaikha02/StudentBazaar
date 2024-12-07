@@ -46,7 +46,7 @@ class PublishedItemAdapter(private val items: List<PublishedItem>, private val o
                     .apply(RequestOptions()
                         .override(200, 200)
                         .fitCenter()) // Resize to 800x800 pixels (you can adjust this size)
-                        .error(R.drawable.default_image) // Fallback if the image cannot be loaded
+                    .error(R.drawable.default_image) // Fallback if the image cannot be loaded
                     .into(itemImage)
             } else {
                 // If imageUrl is null, select a random default image from local resources

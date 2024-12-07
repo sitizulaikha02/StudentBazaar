@@ -172,7 +172,7 @@ class ChatFragment : Fragment() {
         }
 
         backButton.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
+            findNavController().navigate(R.id.action_chatFragment_to_homepageFragment)
         }
 
         userButton.setOnClickListener {

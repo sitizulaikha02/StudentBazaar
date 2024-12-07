@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import java.util.Locale
 import android.location.Geocoder
+import androidx.navigation.fragment.findNavController
 
 class MeetupFragment : Fragment() {
 
@@ -69,6 +70,11 @@ class MeetupFragment : Fragment() {
             } else {
                 Toast.makeText(context, "Please enter a location", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        // Handle back button
+        view.findViewById<ImageButton>(R.id.button_back_to_chat).setOnClickListener {
+            findNavController().navigate(R.id.action_meetupFragment_to_chatFragment)
         }
     }
 
