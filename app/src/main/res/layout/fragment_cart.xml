@@ -26,8 +26,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="Back"
             android:padding="8dp"
-            android:src="@drawable/ic_back"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:src="@drawable/ic_back" />
 
         <!-- Title in the middle -->
         <TextView
@@ -38,9 +37,7 @@
             android:layout_marginEnd="35dp"
             android:text="@string/cart_title"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@id/button_back" />
-
+            android:textSize="18sp" />
     </LinearLayout>
 
     <!-- RecyclerView for cart items -->
@@ -51,7 +48,21 @@
         app:layout_constraintTop_toBottomOf="@+id/title_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/checkoutButton" />
+        app:layout_constraintBottom_toTopOf="@+id/totalPriceTextView" />
+
+    <!-- Total Price TextView -->
+    <TextView
+        android:id="@+id/totalPriceTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Total: $0.00"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/checkoutButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
 
     <!-- Checkout Button -->
     <Button
@@ -63,6 +74,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5" /> <!-- Ensures button is centered -->
-
+        app:layout_constraintHorizontal_bias="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

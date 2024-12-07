@@ -153,18 +153,8 @@
         android:label="fragment_meetup"
         tools:layout="@layout/fragment_map_meetup" />
 
-    <fragment
-        android:id="@+id/cartFragment"
-        android:name="com.cs407.studentbazaar.CartFragment"
-        android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart">
-        <action
-            android:id="@+id/action_cartFragment_to_homeFragment"
-            app:destination="@id/HomepageFragment" />
-        <action
-            android:id="@+id/action_cartFragment_to_userProfileFragment"
-            app:destination="@id/userProfileFragment" />
-    </fragment>
+
+
     <fragment
         android:id="@+id/inboxFragment"
         android:name="com.cs407.studentbazaar.InboxFragment"
@@ -177,4 +167,39 @@
             android:id="@+id/action_inboxFragment_to_HomepageFragment"
             app:destination="@id/HomepageFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.cs407.studentbazaar.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment_to_homepageFragment"
+            app:destination="@id/HomepageFragment" />
+        <action
+            android:id="@+id/action_cartFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_cartFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.cs407.studentbazaar.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment">
+        <argument
+            android:name="totalPrice"
+            app:argType="string" />
+        <argument
+            android:name="cartItemsJson"
+            app:argType="string" /> <!-- Fixed argument type -->
+        <action
+            android:id="@+id/action_paymentFragment_to_homepageFragment"
+            app:destination="@id/HomepageFragment" />
+    </fragment>
+
+
+
 </navigation>

@@ -56,6 +56,7 @@ android {
     }
 }
 
+
 dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
     implementation("com.google.firebase:firebase-firestore-ktx")
@@ -89,6 +90,7 @@ dependencies {
     implementation(libs.play.services.location)
     implementation(libs.play.services.maps)
 
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
     // To use Kotlin Symbol Processing (KSP)
     ksp(libs.androidx.room.compiler)
 

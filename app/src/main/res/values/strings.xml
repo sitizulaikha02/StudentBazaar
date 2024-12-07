@@ -52,6 +52,7 @@
     <string name="followers_count">%s</string>
     <string name="following_count">%s</string>
     <string name="following">Following</string>
+    <string name="google_maps_api_key">AIzaSyD2TFL1W-fnM_ieDWtLzYpexuZNcV4Zbe8</string>
     // Notification
     <string name="notifications">Notifications</string>
     <string name="send_notification">Send Notification</string>
