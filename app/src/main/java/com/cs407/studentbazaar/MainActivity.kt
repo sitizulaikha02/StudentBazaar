@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 
 class MainActivity : AppCompatActivity() {
@@ -56,9 +55,6 @@ class MainActivity : AppCompatActivity() {
                 putString("name", name)
                 putString("uid", uid)
             }
-
-            // Check current destination to avoid duplicate navigation
-            // val currentDestination = navController.currentDestination?.id
 
             // Handle navigation based on the notification type
             when (notificationType) {

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -29,7 +28,6 @@ class ViewItemFragment : Fragment() {
     private lateinit var messageSellerButton: Button
     private lateinit var backButton: ImageView
     private lateinit var cartViewModel: CartViewModel
-    private lateinit var userId: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
