@@ -1,5 +1,6 @@
 package com.cs407.studentbazaar
 
+import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -7,14 +8,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
-import android.widget.Switch
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.widget.SearchView
 import com.cs407.studentbazaar.adapters.PublishedItemAdapter
 import com.cs407.studentbazaar.adapters.PublishedItem
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class HomepageFragment : Fragment() {
@@ -30,6 +28,7 @@ class HomepageFragment : Fragment() {
     private lateinit var adapter: PublishedItemAdapter
     private val items = mutableListOf<PublishedItem>()
     private val firestore = FirebaseFirestore.getInstance()
+    private val firebaseAuth = FirebaseAuth.getInstance()
 
     private lateinit var usernameButton: ImageButton
     private lateinit var publishItemButton: Button
@@ -40,6 +39,7 @@ class HomepageFragment : Fragment() {
     private lateinit var priceHighSwitch: Switch
     private lateinit var cartButton: ImageView
     private lateinit var inboxButton: ImageView
+    private lateinit var greetingBox: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,12 +48,7 @@ class HomepageFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_homepage, container, false)
 
-        // Request notifications permission
-        requestPermission()
-        NotificationHelper.getInstance().createNotificationChannel(requireContext())
-
-        // Initialize the button
-        // Initialize RecyclerView and set the adapter
+        // Initialize UI elements
         recyclerView = view.findViewById(R.id.recyclerView2)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = PublishedItemAdapter(items.toMutableList()) { selectedItem ->
@@ -71,9 +66,6 @@ class HomepageFragment : Fragment() {
         }
         recyclerView.adapter = adapter
 
-        fetchItems()
-
-        // Initialize buttons and switches
         usernameButton = view.findViewById(R.id.usernameButton)
         publishItemButton = view.findViewById(R.id.publish_item)
         searchBox = view.findViewById<SearchView>(R.id.searchBox)
@@ -83,8 +75,10 @@ class HomepageFragment : Fragment() {
         priceHighSwitch = view.findViewById(R.id.priceHighSwitch)
         cartButton = view.findViewById(R.id.cartButton)
         inboxButton = view.findViewById(R.id.inboxButton)
+        greetingBox = view.findViewById(R.id.greetingHome)
 
-        // Fetch and display the items from Firestore
+        // Load user details and items
+        loadUserData()
         fetchItems()
 
         // Set button listeners
@@ -110,31 +104,27 @@ class HomepageFragment : Fragment() {
         return view
     }
 
-    // ********************************
-    // REQUEST NOTIFICATIONS PERMISSION
-    // ********************************
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (!isGranted) {
-            Toast.makeText(
-                requireContext(),
-                "Please allow all notifications to continue.",
-                Toast.LENGTH_LONG
-            ).show()
-        }
-    }
-
-    @VisibleForTesting
-    public fun requestPermission() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-            return
-        }
-        if (ContextCompat.checkSelfPermission(
-                requireContext(), android.Manifest.permission.POST_NOTIFICATIONS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+    private fun loadUserData() {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            val userId = currentUser.uid
+            firestore.collection("users").document(userId)
+                .get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot != null && documentSnapshot.exists()) {
+                        val name = documentSnapshot.getString("username")
+                        greetingBox.text = "Welcome, $name!"
+                    } else {
+                        greetingBox.text = "Welcome!"
+                        Log.w("HomepageFragment", "User document not found.")
+                    }
+                }
+                .addOnFailureListener { e ->
+                    greetingBox.text = "Welcome!"
+                    Log.e("HomepageFragment", "Failed to load user data: ${e.message}", e)
+                }
+        } else {
+            greetingBox.text = "Welcome!"
         }
     }
 
@@ -146,11 +136,10 @@ class HomepageFragment : Fragment() {
                 for (document in querySnapshot.documents) {
                     val item = document.toObject(PublishedItem::class.java)
                     if (item != null) {
-                        // Log.d("FetchItems", "Fetched item: ${item.title}, imageUri: ${item.imageUri}")
                         items.add(item)
                     }
                 }
-                adapter.updateItems(items) // Initial display of all items
+                adapter.updateItems(items)
             }
             .addOnFailureListener { e ->
                 Toast.makeText(requireContext(), "Failed to load items: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -176,43 +165,64 @@ class HomepageFragment : Fragment() {
         nearbySwitch.setOnCheckedChangeListener { _, _ -> filterAndSearchItems(searchBox.query.toString()) }
         priceLowSwitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                priceHighSwitch.isChecked = false // Disable the other switch
+                priceHighSwitch.isChecked = false
             }
             filterAndSearchItems(searchBox.query.toString())
         }
         priceHighSwitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                priceLowSwitch.isChecked = false // Disable the other switch
+                priceLowSwitch.isChecked = false
             }
             filterAndSearchItems(searchBox.query.toString())
         }
     }
 
     private fun filterAndSearchItems(query: String = "") {
-        // Filter items based on the search query and switches
         val filteredItems = items.filter { item ->
             val matchesQuery = item.title.contains(query, ignoreCase = true) ||
                     item.description.contains(query, ignoreCase = true)
             val matchesNew = !newSwitch.isChecked || item.label.equals("new", ignoreCase = true)
-            val matchesNearby = !nearbySwitch.isChecked || isNearby(item) // Replace with real nearby logic
-
+            val matchesNearby = !nearbySwitch.isChecked || isNearby(item)
             matchesQuery && matchesNew && matchesNearby
         }
 
-        // Sort items based on the price filters
         val sortedItems = when {
-            priceLowSwitch.isChecked -> filteredItems.sortedBy { it.price } // Low to high
-            priceHighSwitch.isChecked -> filteredItems.sortedByDescending { it.price } // High to low
-            else -> filteredItems // No sorting applied
+            priceLowSwitch.isChecked -> filteredItems.sortedBy { it.price }
+            priceHighSwitch.isChecked -> filteredItems.sortedByDescending { it.price }
+            else -> filteredItems
         }
 
-        // Update RecyclerView with the filtered and sorted items
         adapter.updateItems(sortedItems)
     }
 
     private fun isNearby(item: PublishedItem): Boolean {
-        // Placeholder for "nearby" logic
-        return true // Replace with real location checking
+        return true // Replace with actual location checking
+    }
+
+
+private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (!isGranted) {
+            Toast.makeText(
+                requireContext(),
+                "Please allow all notifications to continue.",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+    @VisibleForTesting
+    public fun requestPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            return
+        }
+        if (ContextCompat.checkSelfPermission(
+                requireContext(), android.Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+        }
     }
 }
+
 
