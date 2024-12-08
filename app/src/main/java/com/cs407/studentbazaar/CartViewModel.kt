@@ -36,6 +36,12 @@ class CartViewModel : ViewModel() {
         recalculateTotal()
     }
 
+    // Clear all items from the cart and reset the total price
+    fun clearCart() {
+        _cartItems.value = emptyList()
+        _totalPrice.value = 0.0
+    }
+
     // Recalculate the total price based on the current items in the cart
     private fun recalculateTotal() {
         val total = _cartItems.value?.sumOf { it.price } ?: 0.0

@@ -77,7 +77,8 @@ class ViewItemFragment : Fragment() {
                 label = labelTextView.text.toString(),
                 condition = conditionTextView.text.toString(),
                 imageUri = arguments?.getString("imageUri") ?: "",
-                userId = arguments?.getString("userId") ?: ""
+                userId = arguments?.getString("userId") ?: "",
+                id = arguments?.getString("id") ?: ""
             )
 
             // Add the item to the cart using ViewModel

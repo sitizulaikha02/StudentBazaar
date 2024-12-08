@@ -3,7 +3,6 @@ package com.cs407.studentbazaar
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,6 +58,7 @@ class HomepageFragment : Fragment() {
         adapter = PublishedItemAdapter(items.toMutableList()) { selectedItem ->
             // Navigate to ViewItemFragment and pass the selected item's data
             val bundle = Bundle().apply {
+                putString("id", selectedItem.id)
                 putString("title", selectedItem.title)
                 putString("description", selectedItem.description)
                 putString("imageUri", selectedItem.imageUri)
@@ -147,6 +147,7 @@ class HomepageFragment : Fragment() {
                     val item = document.toObject(PublishedItem::class.java)
                     if (item != null) {
                         // Log.d("FetchItems", "Fetched item: ${item.title}, imageUri: ${item.imageUri}")
+                        item.id = document.id
                         items.add(item)
                     }
                 }

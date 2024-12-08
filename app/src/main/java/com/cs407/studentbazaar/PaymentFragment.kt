@@ -14,6 +14,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.firestore.FirebaseFirestore
 
 class PaymentFragment : Fragment() {
 
@@ -79,6 +80,9 @@ class PaymentFragment : Fragment() {
     private fun handleCashMeetUp() {
         Snackbar.make(requireView(), "Cash Meet Up selected!", Snackbar.LENGTH_SHORT).show()
         Log.d("PaymentFragment", "Cash Meet Up Selected")
+
+        removePurchasedItems()
+
         findNavController().navigate(R.id.action_paymentFragment_to_homepageFragment)
     }
 
@@ -110,33 +114,36 @@ class PaymentFragment : Fragment() {
         Log.d("PaymentFragment", "Processing credit card payment...")
         Snackbar.make(requireView(), "Payment successful!", Snackbar.LENGTH_SHORT).show()
 
+        removePurchasedItems()
+
         // Navigate to homepage or display a success screen
         findNavController().navigate(R.id.action_paymentFragment_to_homepageFragment)
     }
 
-    private fun handlePaymentSuccess() {
-        // Log success and show a confirmation to the user
-        Log.d("PaymentFragment", "Payment successful!")
-        Snackbar.make(requireView(), "Payment successful!", Snackbar.LENGTH_SHORT).show()
-
-        // Remove purchased items from the listing
-        removePurchasedItems()
-
-        // Navigate to homepage
-        findNavController().navigate(R.id.action_paymentFragment_to_homepageFragment)
-    }
-
     private fun removePurchasedItems() {
+        val sharedViewModel = ViewModelProvider(requireActivity())[CartViewModel::class.java]
+        sharedViewModel.clearCart() // Clear the cart
+        Log.d("PaymentFragment", "Cart cleared after checkout")
+
         val cartItemsJson = arguments?.getString("cartItemsJson") ?: "[]"
         val cartItems: ArrayList<PublishedItem> = Gson().fromJson(
             cartItemsJson,
             object : TypeToken<ArrayList<PublishedItem>>() {}.type
         )
 
-        val sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
-        sharedViewModel.removeItems(cartItems)
+        val firestore = FirebaseFirestore.getInstance()
+        val collectionRef = firestore.collection("items") // Replace "items" with your collection name
 
-        Log.d("PaymentFragment", "Items removed from listing: $cartItems")
+        cartItems.forEach { item ->
+            // Assuming the item ID is stored as `item.id`
+            collectionRef.document(item.id).delete()
+                .addOnSuccessListener {
+                    Log.d("PaymentFragment", "Item ${item.id} deleted successfully from Firestore")
+                }
+                .addOnFailureListener { e ->
+                    Log.e("PaymentFragment", "Error deleting item ${item.id}", e)
+                }
+        }
     }
 
 }
