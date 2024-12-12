@@ -1,4 +1,4 @@
-# Student Bazaar (Milestone 1) 
+# Student Bazaar 
 
 ## Project Contributions:
 
